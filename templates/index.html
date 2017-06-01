@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Bibliomart </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootswatch.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static',filename='images/favicon.png') }}"/>
+</head>
+<style type="text/css">
+.navbar-nav > li{
+    font-size: 14px;
+}
+</style>
+<body style="padding-top: 70px;">
+
+    <!-- Fixed navbar -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+
+        {% include 'flash.html'%}
+
+
+        <div class="btn-group btn-group-justified">
+
+            <a href="{{url_for('index')}}" class="btn btn-primary">Home</a>
+            <a href="{{url_for('aboutus')}}" class="btn btn-default">About Us</a>
+            <a href="{{url_for('contactus')}}" class="btn btn-default">Contact US</a>
+
+
+        </div>
+
+        <div class="jumbotron">
+            <center><h1>HOME</h1></center>
+            <p>
+Bibliomart is an online platform to sell and buy used books.
+Our target customers are students and book lovers.
+In our system we do not give a deadline.
+The customers will be provided with clear indexed lists based on categories like fiction,
+non-fiction, textbooks, popularity, pricing, authors, etc.
+They can buy books from the store with a guarantee that it will be bought back
+from them if returned in good condition, whenever they chose to do so.
+Payment can be done through our secure online gateways.
+We aim to provide a hassle free experience for all our users.
+            </p>
+        </div>
+
+
+        <!-- Main component for a primary marketing message or call to action -->
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>

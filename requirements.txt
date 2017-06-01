@@ -1,0 +1,11 @@
+Flask==0.12
+Flask-Login==0.3.2
+Flask-Security==1.7.5
+Flask-SQLAlchemy==2.2
+Flask-WTF==0.14.2
+Jinja2==2.9.5
+requests==2.13.0
+six==1.10.0
+SQLAlchemy==1.1.6
+Werkzeug==0.12.1
+WTForms==2.1
