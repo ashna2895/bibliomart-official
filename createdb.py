@@ -10,10 +10,23 @@ with app.app_context():
 #add sample entries
 from app import User, Category
 with app.app_context():
-    u = User("ashna","ashna@bibliomart.com","password","9995903767","admin")
-    u.is_admin = True
-    u.verified = True
-    db.session.add(u)
+    u1 = User("ashna","ashna@bibliomart.com","password","9995903767","admin")
+    u1.is_admin = True
+    u1.verified = True
+    db.session.add(u1)
+
+
+    u2 = User("anita","anita@bibliomart.com","password","1234567890","admin")
+    u2.is_admin = True
+    u2.verified = True
+    db.session.add(u2)
+
+
+    u3 = User("tissa","tissa@bibliomart.com","password","0123456789","admin")
+    u3.is_admin = True
+    u3.verified = True
+    db.session.add(u3)
+
 
     c = Category("Fiction")
     db.session.add(c)

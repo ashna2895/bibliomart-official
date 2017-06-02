@@ -59,9 +59,107 @@ We aim to provide a hassle free experience for all our users.
         </div>
 
 
+        <div class="col-md-10" >
+            <div class="panel">
+                <div class="panel-body">
+                    <h3>All Books:</h3>
+                    <hr/>
+                    {% for book in books %}
+
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>{{book.title}}</h4>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <span style="font-size:14px;padding-right:10px">{{book.author}}</span>
+                                <hr/>
+                                <p class="book-description">{{book.description}}</p>
+
+                                {% if book.images.all() %}
+                                <hr/>
+                                <div class = "row">
+                                    <ul class="list-unstyled">
+                                        {% for i in book.images.all() %}
+                                        <li>
+                                            <div class="col-md-3">
+                                                <a  class="thumbnail">
+                                                    <img src="{{ url_for('static', filename='files/images/%s'%(i.filename))}}">
+                                                </a>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                {% endif %}
+
+                                <hr/>
+                                <span class="pull-left">
+                                    <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                                    Category: {{book.category.name}}
+                                </span>
+                                <span class="pull-right">
+                                    Price: {{book.price}}
+                                </span>
+
+                                {#<div class="pull-right">
+                                    <a href="{{url_for('view_book', book_id=book.id)}}" style="padding-right: 1em;">
+                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                        {{book.comments.all() | length }} Comment(s)
+                                    </a>
+                                    <a href="{{url_for('view_book', book_id=book.id)}}" >
+                                        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                                        Permalink
+                                    </a>
+                                </div>#}
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- Main component for a primary marketing message or call to action -->
 
     </div> <!-- /container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- Bootstrap core JavaScript

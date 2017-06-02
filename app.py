@@ -34,7 +34,8 @@ def before_request():
 
 @app.route('/')
 def index():
-    return render_template("index.html",page="home")
+    books = Book.query.all()
+    return render_template("index.html",page="home",books=books)
 
 @app.route('/about')
 def aboutus():
@@ -280,11 +281,12 @@ def add_category():
 
     return render_template('add_category.html',page="category")
 
-@app.route('/admin/confirmed_orders')
+@app.route('/admin/confirmed_orders', methods = ['GET', 'POST'])
 @login_required
 def admin_confirmed_orders():
     return render_template('admin_confirmed_orders.html',page="admin_confirmed_orders")
-    
+
+
 
 
 @app.route('/test/<template>')
