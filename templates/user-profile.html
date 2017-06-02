@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Bibliomart | My Account</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="{{ url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/bootswatch.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fileinput.min.css')}}" media="all" rel="stylesheet" type="text/css" />
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='js/fileinput.js')}}" type="text/javascript"></script>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static',filename='images/favicon.png') }}"/>
+</head>
+
+<body style="padding-top: 70px;">
+    <div class="container">
+
+        {% include 'navbar.html' %}
+        <!-- main right col -->
+        {%  include 'flash.html' %}
+
+        <div class="row">
+            <div class="col-md-2" >
+                <h3></h3>
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="{{url_for('admin_verify')}}">
+                            Orders
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{url_for('add_book')}}">
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin_view_books')}}">
+                            Wishlist
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('add_category')}}">
+                            Cart
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin_confirmed_orders')}}">
+                            Personal Information
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+        <script type="text/javascript">
+        $("#file").fileinput({'showUpload':false});
+
+
+        var form = document.getElementById('file-form');
+        var fileSelect = document.getElementById('file');
+        var uploadButton = document.getElementById('submit-button');
+        var cancelButton = document.getElementById('cancel-button');
+
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            uploadButton.innerHTML = 'Uploading...';
+            cancelButton.setAttribute('disabled','disabled');
+
+            var formsend = new FormData(this);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    uploadButton.innerHTML = 'Done';
+                    window.location = '/admin/add-book';
+                } else {
+                    alert('An error occurred!');
+                }
+            };
+
+            xhr.send(formsend);
+        }
+
+        </script>
+    </body>
+</html>
