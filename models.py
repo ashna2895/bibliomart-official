@@ -116,5 +116,19 @@ class ConfirmedOrders(db.Model):
         self.paymentid = paymentid
 
 
+class Cart(db.Model):
+    """docstring for Cart."""
+    __tablename__ = "cart"
+    id = db.Column(db.Integer, primary_key=True)
+    bookids = db.Column(db.Integer, db.ForeignKey('book.id'))
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    total_amount = db.Column(db.Float)
+    no_of_items = db.Column(db.Integer)
+
+
+
+    def __init__(self, arg):
+        self.arg = arg
+
 
         #done!

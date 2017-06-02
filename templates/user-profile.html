@@ -65,39 +65,6 @@
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-
-        <script type="text/javascript">
-        $("#file").fileinput({'showUpload':false});
-
-
-        var form = document.getElementById('file-form');
-        var fileSelect = document.getElementById('file');
-        var uploadButton = document.getElementById('submit-button');
-        var cancelButton = document.getElementById('cancel-button');
-
-        form.onsubmit = function(event) {
-            event.preventDefault();
-            uploadButton.innerHTML = 'Uploading...';
-            cancelButton.setAttribute('disabled','disabled');
-
-            var formsend = new FormData(this);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '', true);
-
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    uploadButton.innerHTML = 'Done';
-                    window.location = '/admin/add-book';
-                } else {
-                    alert('An error occurred!');
-                }
-            };
-
-            xhr.send(formsend);
-        }
-
-        </script>
+      
     </body>
 </html>
