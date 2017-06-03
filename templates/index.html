@@ -23,41 +23,19 @@
 <body>
 
     <!-- Navigation -->
-    {% include 'navbar.html' %}
 
-
-
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        {% include 'navbar.html' %}
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Bibliomart</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
+            {% include 'flash.html'%}
+  <div class="btn-group btn-group-justified">
+
+      <a href="{{url_for('index')}}" class="btn btn-default">Home</a>
+      <a href="{{url_for('aboutus')}}" class="btn btn-default">About Us</a>
+      <a href="{{url_for('contactus')}}" class="btn btn-primary">Contact US</a>
+
+  </div>
+  
 
     <!-- Page Content -->
     <div class="container">
