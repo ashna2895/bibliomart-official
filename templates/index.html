@@ -23,6 +23,11 @@
 <body>
 
     <!-- Navigation -->
+    {% include 'navbar.html' %}
+
+
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -105,7 +110,7 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img style="width:300px; height:320px;" src="{{ url_for('static', filename='files/images/%s'%(book.images.first().filename))}}">
+                            <img style="width:px; height:320px;" src="{{ url_for('static', filename='files/images/%s'%(book.images.first().filename))}}">
                             <div class="caption">
                                 <h4 class="pull-right">₹{{book.price}}</h4>
                                 <hr>

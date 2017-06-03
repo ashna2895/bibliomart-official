@@ -284,7 +284,7 @@ def add_category():
 @app.route('/admin/confirmed_orders', methods = ['GET', 'POST'])
 @login_required
 def admin_confirmed_orders():
-    return render_template('admin_confirmed_orders.html',page="admin_confirmed_orders")
+    return render_template('admin-confirmedorders.html',page="admin_confirmed_orders")
 
 
 
