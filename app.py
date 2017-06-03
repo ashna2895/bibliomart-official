@@ -286,7 +286,11 @@ def add_category():
 def admin_confirmed_orders():
     return render_template('admin-confirmedorders.html',page="admin_confirmed_orders")
 
-
+@app.route('/book/<book_id>', methods = ['GET', 'POST'])
+def product_page(book_id):
+    book = Book.query.get(int(book_id))
+    categories = Category.query.all()
+    return render_template('pdt.html',page="individual prodtuct pages", categories=categories, book=book)
 
 
 @app.route('/test/<template>')

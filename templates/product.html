@@ -1856,22 +1856,23 @@
         </div>
 
     </div>
-
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/swiper.jquery.min.js"></script>
-    <script src="js/global.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/global.js')}}"></script>
 
     <!-- styled select -->
-    <script src="js/jquery.sumoselect.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
 
     <!-- counter -->
-    <script src="js/jquery.classycountdown.js"></script>
-    <script src="js/jquery.knob.js"></script>
-    <script src="js/jquery.throttle.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.classycountdown.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.knob.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.throttle.js')}}"></script>
 
-    <!-- range slider -->
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.ui.touch-punch.min.js"></script>
+  	<!-- range slider -->
+
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js')}}"></script>
+
     <script>
         $(document).ready(function(){
             var minVal = parseInt($('.min-price').text());
