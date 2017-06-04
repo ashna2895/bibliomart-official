@@ -16,7 +16,7 @@ with app.app_context():
     db.session.add(u1)
 
 
-    u2 = User("anita","anita@bibliomart.com","password","1234567890","admin")
+    u2 = User("anita","anita@bibliomart.com","password","8547087845","admin")
     u2.is_admin = True
     u2.verified = True
     db.session.add(u2)

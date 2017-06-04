@@ -281,10 +281,10 @@ def add_category():
 
     return render_template('add_category.html',page="category")
 
-@app.route('/admin/confirmed_orders', methods = ['GET', 'POST'])
+@app.route('/admin/confirmed_orders')
 @login_required
 def admin_confirmed_orders():
-    return render_template('admin-confirmedorders.html',page="admin_confirmed_orders")
+    return render_template("admin-confirmed-orders.html", page="admin_confirmed_orders")
 
 @app.route('/book/<book_id>', methods = ['GET', 'POST'])
 def product_page(book_id):
@@ -299,4 +299,4 @@ def test(template):
     return render_template(template+'.html')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5050)
+    app.run()

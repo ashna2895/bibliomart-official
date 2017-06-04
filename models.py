@@ -102,11 +102,12 @@ class Image(db.Model):
 
 
 class ConfirmedOrders(db.Model):
+
     __tablename__ = "confirmed_orders"
     id = db.Column(db.Integer, primary_key=True)
-    bookid = db.Column(db.Integer, db.ForeignKey('book.id'))
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-    amount = db.Column(db.Float)
+    bookid = db.Column(db.Integer,db.ForeignKey('book.id'))
+    userid = db.Column(db.Integer,db.ForeignKey('user.id'))
+    amount = db.Column(db.Integer)
     paymentid = db.Column(db.Integer)
 
     def __init__(self, bookid, userid, amount, paymentid):
