@@ -43,7 +43,9 @@
                                 <div class="col-sm-4">
                                     <div class="product-shortcode style-1">
                                         <div class="title">
-                                            <div class="h6 animate-to-green"><a href="#">{{book.title}}</a></div>
+                                            <div class="h6 animate-to-green">
+                                                <a href="/book/{{book.id|lower}}">{{book.title}}</a>
+                                            </div>
                                         </div>
                                         <div class="preview">
                                             <img style="height:350px;"src="{{ url_for('static', filename='files/images/%s'%(book.images.all()[0].filename))}}" alt="">
