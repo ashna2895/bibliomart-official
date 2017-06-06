@@ -26,39 +26,22 @@ login_manager.login_view = 'login'
 def load_user(id):
     return User.query.get(int(id))
 
-
-
 @app.before_request
 def before_request():
     g.user = current_user
-
-
-
-@app.route('/')
-def index():
-    books = Book.query.all()
-    return render_template("index.html",page="home",books=books)
-
-
 
 @app.route('/about')
 def aboutus():
     return render_template("aboutus.html",page="about")
 
-
-
 @app.route('/contact')
 def contactus():
     return render_template("contactus.html",page="contact")
-
-
 
 @app.route('/admin/books')
 def admin_view_books():
     books = Book.query.all()
     return render_template("admin-view-books.html", page="admin_view_books", books=books)
-
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -85,8 +68,6 @@ def login():
             flash('Username or Password is invalid' , 'warning')
             return render_template("login.html",page="login")
 
-
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -95,96 +76,6 @@ def logout():
     logout_user()
     flash('Logged out successfully.' , 'success')
     return redirect(url_for('login'))
-
-
-
-@app.route('/admin/verify',methods=['GET','POST'])
-@login_required
-def admin_verify():
-    if g.user.is_admin:
-        if request.method == 'POST':
-            app.logger.info(request.form)
-            formtype = request.form['formtype']
-            user_id = request.form['userid']
-            user = User.query.get(int(user_id))
-            if formtype == 'approve':
-                user.verified = True
-                db.session.add(user)
-            elif formtype == 'reject':
-                if user.verified == False:
-                    db.session.delete(user)
-            db.session.commit()
-            return redirect(url_for('admin_verify'))
-
-        categories = Category.query.all()
-        unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
-        return render_template(
-            'admin-verify.html', unverifiedusers = unverifiedusers,
-            categories=categories,page="admin_user_verify"
-        )
-
-@app.route('/user/edit',methods=['GET','POST'])
-@login_required
-def edituser():
-    categories = Category.query.all()
-    users = User.query.all()
-
-    error = False
-    if request.method == 'GET':
-        return render_template('edituser.html',page="edituser", categories=categories,users=users)
-
-    elif request.method == 'POST':
-        app.logger.info(repr(request.form))
-        edittype = request.form['edittype']
-        if edittype == 'changepassword':
-            oldpassword = request.form['old-password']
-            newpassword = request.form['new-password']
-            passwordconfirm = request.form['password-confirm']
-            if newpassword != passwordconfirm:
-                error = True
-                flash("Passwords don't match",'warning')
-
-            if not check_password_hash(g.user.pwdhash, oldpassword):
-                error = True
-                flash("Current Password is invalid",'warning')
-            if error:
-                return render_template(
-                    'edituser.html',page="edituser",categories=categories,
-                    users=users
-                )
-            else:
-                g.user.pwdhash = generate_password_hash(newpassword)
-                db.session.commit()
-                flash("Password changed succesfully.",'success')
-                return render_template(
-                    'edituser.html',page="edituser",categories=categories,
-                    users=users
-                )
-
-        elif edittype == 'userdetails':
-            usrname = request.form['name']
-            mobno = request.form['mobilenumber']
-            password = request.form['password']
-            if len(mobno) != 10 or not mobno.isdigit():
-                error = True
-                flash("Mobile number is invalid",'warning')
-            if not check_password_hash(g.user.pwdhash, password):
-                error = True
-                flash("Password is invalid",'warning')
-            if error:
-                return render_template(
-                    'edituser.html',page="edituser",categories=categories,
-                    users=users
-                )
-            else:
-                g.user.name = usrname
-                g.user.mobilenumber = mobno
-                db.session.commit()
-                flash("Details changed succesfully.",'success')
-                return render_template(
-                    'edituser.html',page="edituser",categories=categories,
-                    users=users
-                )
 
 
 @app.route('/register',methods=['GET','POST'])
@@ -299,11 +190,124 @@ def add_category():
 def admin_confirmed_orders():
     return render_template("admin-confirmed-orders.html", page="admin_confirmed_orders")
 
+@app.route('/admin/verify',methods=['GET','POST'])
+@login_required
+def admin_verify():
+    if g.user.is_admin:
+        if request.method == 'POST':
+            app.logger.info(request.form)
+            formtype = request.form['formtype']
+            user_id = request.form['userid']
+            user = User.query.get(int(user_id))
+            if formtype == 'approve':
+                user.verified = True
+                db.session.add(user)
+            elif formtype == 'reject':
+                if user.verified == False:
+                    db.session.delete(user)
+            db.session.commit()
+            return redirect(url_for('admin_verify'))
+
+        categories = Category.query.all()
+        unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
+        return render_template(
+            'admin-verify.html', unverifiedusers = unverifiedusers,
+            categories=categories,page="admin_user_verify"
+        )
+
+@app.route('/user/edit',methods=['GET','POST'])
+@login_required
+def edituser():
+    categories = Category.query.all()
+    users = User.query.all()
+
+    error = False
+    if request.method == 'GET':
+        return render_template('edituser.html',page="edituser", categories=categories,users=users)
+
+    elif request.method == 'POST':
+        app.logger.info(repr(request.form))
+        edittype = request.form['edittype']
+        if edittype == 'changepassword':
+            oldpassword = request.form['old-password']
+            newpassword = request.form['new-password']
+            passwordconfirm = request.form['password-confirm']
+            if newpassword != passwordconfirm:
+                error = True
+                flash("Passwords don't match",'warning')
+
+            if not check_password_hash(g.user.pwdhash, oldpassword):
+                error = True
+                flash("Current Password is invalid",'warning')
+            if error:
+                return render_template(
+                    'edituser.html',page="edituser",categories=categories,
+                    users=users
+                )
+            else:
+                g.user.pwdhash = generate_password_hash(newpassword)
+                db.session.commit()
+                flash("Password changed succesfully.",'success')
+                return render_template(
+                    'edituser.html',page="edituser",categories=categories,
+                    users=users
+                )
+
+        elif edittype == 'userdetails':
+            usrname = request.form['name']
+            mobno = request.form['mobilenumber']
+            password = request.form['password']
+            if len(mobno) != 10 or not mobno.isdigit():
+                error = True
+                flash("Mobile number is invalid",'warning')
+            if not check_password_hash(g.user.pwdhash, password):
+                error = True
+                flash("Password is invalid",'warning')
+            if error:
+                return render_template(
+                    'edituser.html',page="edituser",categories=categories,
+                    users=users
+                )
+            else:
+                g.user.name = usrname
+                g.user.mobilenumber = mobno
+                db.session.commit()
+                flash("Details changed succesfully.",'success')
+                return render_template(
+                    'edituser.html',page="edituser",categories=categories,
+                    users=users
+                )
+
+@app.route('/')
+def index():
+    books = Book.query.all()
+    return render_template("index.html",page="home",books=books)
+
+@app.route('/404')
+def error_404():
+    categories = Category.query.all()
+    return render_template("404.html",page="404",categories=categories)
+
 @app.route('/book/<book_id>', methods = ['GET', 'POST'])
-def product_page(book_id):
+def book_page(book_id):
     book = Book.query.get(int(book_id))
     categories = Category.query.all()
     return render_template('product.html',page="individual book pages", categories=categories, book=book)
+
+@app.route('/books', methods = ['GET', 'POST'])
+@app.route('/books/<category>', methods = ['GET', 'POST'])
+def product_list_page(category=''):
+    categories = Category.query.all()
+    if category:
+        selected_category = Category.query.filter_by(name=category)
+        if not selected_category:
+            return redirect(urlfor(error_404))
+        else:
+            books = Book.query.filter(Book.category.has(name=category)).all()
+    else:
+        books = Book.query.all()
+    page = category.capitalize()
+    return render_template('products_list.html',page=page, categories=categories, books=books)
 
 
 @app.route('/test/<template>')

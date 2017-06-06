@@ -110,7 +110,7 @@
                     <ul class="categories-menu transparent">
                         {% for i in categories %}
                         <li>
-                            <a href="#">{{i.name}}</a>
+                            <a href="/books/{{i.name|lower}}">{{i.name}}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -119,7 +119,7 @@
             </div>
             <div class="empty-space col-md-b70"></div>
             <div class="row">
-                <div class="col-sm-6 col-md-3 col-xs-b25">
+                <div class="col-sm-6 col-md-4 col-xs-b25">
                     <div class="h4 col-xs-b25">Top Rated</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="img/product-31.jpg" alt="" /></a>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-xs-b25">
+                <div class="col-sm-6 col-md-4 col-xs-b25">
                     <div class="h4 col-xs-b25">Popular</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="img/product-34.jpg" alt="" /></a>
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3 col-xs-b25">
+                <div class="col-sm-6 col-md-4 col-xs-b25">
                     <div class="h4 col-xs-b25">Best Choice</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="img/product-37.jpg" alt="" /></a>
