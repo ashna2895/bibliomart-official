@@ -303,7 +303,7 @@ def admin_confirmed_orders():
 def product_page(book_id):
     book = Book.query.get(int(book_id))
     categories = Category.query.all()
-    return render_template('pdt.html',page="individual book pages", categories=categories, book=book)
+    return render_template('product.html',page="individual book pages", categories=categories, book=book)
 
 
 @app.route('/test/<template>')
