@@ -39,6 +39,10 @@ with app.app_context():
     c4 = Category("Educational")
     db.session.add(c4)
 
+
+    b1=
+
+
     db.session.commit()
 
 #It's used to create database entries we initially need like the admin account and categories

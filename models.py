@@ -44,6 +44,8 @@ class User(db.Model):
     def __repr__(self):
         return '<id: %r - email: %r - role:%r>' %(self.id, self.email, self.user_role)
 
+
+
 class Category(db.Model):
     """The database model for Category"""
     __tablename__ = "category"
@@ -55,6 +57,7 @@ class Category(db.Model):
 
     def  __repr__(self):
         return '<Category- id: %r - name: %r ->'%(self.id, self.name)
+
 
 
 class Book(db.Model):
@@ -81,6 +84,8 @@ class Book(db.Model):
     def  __repr__(self):
         return '<id: %r - title: %r ->'%(self.id, self.title)
 
+
+
 class Image(db.Model):
     """The database model for Images"""
     __tablename__ = "image"
@@ -100,36 +105,23 @@ class Image(db.Model):
         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
 
 
-class ConfirmedOrders(db.Model):
 
-    __tablename__ = "confirmed_orders"
-    id = db.Column(db.Integer, primary_key=True)
-    bookid = db.Column(db.Integer,db.ForeignKey('book.id'))
-    userid = db.Column(db.Integer,db.ForeignKey('user.id'))
-    amount = db.Column(db.Integer)
-    paymentid = db.Column(db.Integer)
-
-    def __init__(self, bookid, userid, amount, paymentid):
-        self.bookid = bookid
-        self.userid = userid
-        self.amount = amount
-        self.paymentid = paymentid
-
-
-class Cart(db.Model):
-    """docstring for Cart."""
-    __tablename__ = "cart"
-    id = db.Column(db.Integer, primary_key=True)
-    bookids = db.Column(db.Integer, db.ForeignKey('book.id'))
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-    total_amount = db.Column(db.Float)
-    no_of_items = db.Column(db.Integer)
-
-
-
-    def __init__(self, arg):
-        self.arg = arg
-
+# class ConfirmedOrders(db.Model):
+#
+#     __tablename__ = "confirmed_orders"
+#     id = db.Column(db.Integer, primary_key=True)
+#     bookid = db.Column(db.Integer,db.ForeignKey('book.id'))
+#     userid = db.Column(db.Integer,db.ForeignKey('user.id'))
+#     amount = db.Column(db.Integer)
+#     paymentid = db.Column(db.Integer)
+#
+#     def __init__(self, bookid, userid, amount, paymentid):
+#         self.bookid = bookid
+#         self.userid = userid
+#         self.amount = amount
+#         self.paymentid = paymentid
+#
+#
 # class Cart(db.Model):
 #     __tablename__ = "cart"
 #     id = db.Column(db.Integer, primary_key=True)

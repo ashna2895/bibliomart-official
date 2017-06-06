@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/bootstrap.extension.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/swiper.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/favicon.ico" />
+  	<title>Bibliomart</title>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader-wrapper"></div>
+
+    <div id="content-block">
+
+			    <!-- Navigation -->
+
+			        {% include 'navbar.html' %}
+			        <div class="container">
+
+			            {% include 'flash.html'%}
+
+
+
+        <div class="header-empty-space"></div>
+
+        <div class="container">
+            <div class="empty-space col-xs-b15 col-sm-b30"></div>
+            <div class="breadcrumbs">
+                <a href="#">home</a>
+                <a href="#">checkout</a>
+            </div>
+            <div class="empty-space col-xs-b15 col-sm-b50 col-md-b100"></div>
+            <div class="text-center">
+                <div class="simple-article size-3 grey uppercase col-xs-b5">your order has been successfully adopted</div>
+                <div class="h2">track your order now</div>
+                <div class="title-underline center"><span></span></div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="simple-article size-4 grey">Praesent nec finibus massa. Phasellus id auctor lacus, at iaculis lorem. Donec quis arcu elit. In vehicula purus semeu imperdiet odio, eu interdum justo</div>
+                        <div class="empty-space col-xs-b20 col-sm-b35 col-md-b70"></div>
+                        <div class="row m10">
+                            <div class="col-sm-6">
+                                <input class="simple-input" type="text" value="" placeholder="Order ID" />
+                                <div class="empty-space col-xs-b20"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="simple-input" type="text" value="" placeholder="Billing email" />
+                                <div class="empty-space col-xs-b20"></div>
+                            </div>
+                        </div>
+                        <div class="button size-2 style-3">
+                            <span class="button-wrapper">
+                                <span class="icon"><img src="img/icon-4.png" alt=""></span>
+                                <span class="text">track</span>
+                            </span>
+                            <input type="submit"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-space col-xs-b35 col-md-b70"></div>
+        <div class="empty-space col-xs-b35 col-md-b70"></div>
+
+    </div>
+
+
+  <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='js/global.js')}}"></script>
+    <!-- styled select -->
+	<script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
+
+    <!-- counter -->
+  <script src="{{ url_for('static', filename='js/jquery.classycountdown.js')}}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.knob.js')}}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.throttle.js')}}"></script>
+
+    <!-- masonry -->
+		<script src="{{ url_for('static', filename='js/isotope.pkgd.min.js')}}"></script>
+    <script>
+        $(window).load(function(){
+            var $container = $('.grid').isotope({
+                itemSelector: '.grid-item',
+                masonry: {
+                    columnWidth: '.grid-sizer'
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
