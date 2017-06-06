@@ -27,9 +27,11 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+
 @app.before_request
 def before_request():
     g.user = current_user
+
 
 
 @app.route('/')
@@ -37,18 +39,25 @@ def index():
     books = Book.query.all()
     return render_template("index.html",page="home",books=books)
 
+
+
 @app.route('/about')
 def aboutus():
     return render_template("aboutus.html",page="about")
+
+
 
 @app.route('/contact')
 def contactus():
     return render_template("contactus.html",page="contact")
 
+
+
 @app.route('/admin/books')
 def admin_view_books():
     books = Book.query.all()
     return render_template("admin-view-books.html", page="admin_view_books", books=books)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -69,12 +78,14 @@ def login():
                 user.authenticated = True
                 db.session.commit()
                 login_user(user)
-                return redirect(url_for('admin_verify'))
+                return redirect(url_for('index'))
             flash('Username or Password is invalid' , 'warning')
             return render_template("login.html",page="login")
         else:
             flash('Username or Password is invalid' , 'warning')
             return render_template("login.html",page="login")
+
+
 
 @app.route('/logout')
 @login_required
@@ -84,6 +95,8 @@ def logout():
     logout_user()
     flash('Logged out successfully.' , 'success')
     return redirect(url_for('login'))
+
+
 
 @app.route('/admin/verify',methods=['GET','POST'])
 @login_required
@@ -290,7 +303,7 @@ def admin_confirmed_orders():
 def product_page(book_id):
     book = Book.query.get(int(book_id))
     categories = Category.query.all()
-    return render_template('pdt.html',page="individual prodtuct pages", categories=categories, book=book)
+    return render_template('pdt.html',page="individual book pages", categories=categories, book=book)
 
 
 @app.route('/test/<template>')

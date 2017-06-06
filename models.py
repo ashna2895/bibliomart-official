@@ -14,7 +14,6 @@ class User(db.Model):
     mobilenumber = db.Column(db.String, nullable=False)
     pwdhash = db.Column(db.String, nullable=False)
     registered_on = db.Column(db.DateTime)
-
     authenticated = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default = False)
     verified = db.Column(db.Boolean, default = False)
@@ -131,5 +130,59 @@ class Cart(db.Model):
     def __init__(self, arg):
         self.arg = arg
 
+# class Cart(db.Model):
+#     __tablename__ = "cart"
+#     id = db.Column(db.Integer, primary_key=True)
+#     bookid = db.Column(db.Integer, db.ForeignKey('book.id'))
+#     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     amount = db.Column(db.Float)
+#     items = db.Column(db.Integer)
+#
+#     def __init__(self, bookid, userid, amount, items):
+#         self.bookid = bookid
+#         self.userid = userid
+#         self.amount = amount
+#         self.items = items
+#     def __repr__(self):
+#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
+#
+#
+# class OrderedBooks(db.Model):
+#     """docstring for OrderedBooks."""
+#     __tablename__ = "ordered_books"
+#     id = db.Column(db.Integer, primary_key=True)
+#     name =db.Column(db.String, nullable=False)
+#     order = relationship("Order", secondary="cart",viewonly=True)
+#     def __init__(self, name, order):
+#         self.name = name
+#         self.order = order
+#     def __repr__(self):
+#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
+#
+#
+# class Order(db.Model):
+#     """docstring for Order."""
+#     __tablename__ = "order"
+#     id = db.Column(db.Integer, primary_key=True)
+#     name =db.Column(db.String, nullable=False)
+#     ordered_books =relationship("OrderedBooks", secondary="cart",viewonly=True)
+#
+#     def __init__(self, name, ordered_books):
+#         self.name = name
+#         self.ordered_books = ordered_books
+#     def __repr__(self):
+#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
 
+
+# class Comments(db.Model):
+#     """docstring for comments ."""
+#     __tablename__="comments"
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String,db.ForeignKey('user.id'))
+#     email = db.Column(db.String,db.ForeignKey('user.email'))
+#     comment = db.Column(db.String)
+#     pub_date = db.Column(db.DateTime)
+#     def __init__(self, arg):
+#         #super(, self).__init__()
+#         self.arg = arg
         #done!
