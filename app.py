@@ -359,6 +359,10 @@ def cart():
         resp = make_response("Book added to cart")
         return resp
 
+@app.route('/checkout', methods = ['GET', 'POST'])
+def checkout():
+    return render_template("checkout.html",page="checkout")
+
 
 @app.route('/test/<template>')
 def test(template):
