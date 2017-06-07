@@ -82,7 +82,7 @@
         <div class="content-margins">
             <div class="row">
                 <div class="col-xs-3 col-sm-1">
-                    <a id="logo" href="index1.html"><img src="img/logo-2.png" alt="" /></a>
+                    <a id="logo" href="index.html"><img src="{{ url_for('static', filename='files/images/favicon.png')}}" alt="">Bibliomart</a>
                 </div>
                 <div class="col-xs-9 col-sm-11 text-right">
                     <div class="nav-wrapper">
@@ -90,24 +90,24 @@
                         <nav>
                             <ul>
                                 <li class="active">
-                                    <a href="index1.html">Home</a>
+                                    <a href="index.html">Home</a>
                                 </li>
                                 <li>
-                                    <a href="products1.html">Products</a>
+                                    <a href="products1.html">Books</a>
                                     <div class="menu-toggle"></div>
                                     <ul>
                                         {% for i in categories %}
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
                                         <li>
                                           <a href="/books/{{i.name|lower}}">{{i.name}}</a>
                                         </li>
-=======
+<!-- ======= -->
                                         <li><a href="/books/{{i.name}}">{{i.name}}</a></li>
->>>>>>> origin/cart
+<!-- >>>>>>> origin/cart -->
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="contact1.html">contact</a></li>
+                                <li><a href="contactus.html">contact</a></li>
                             </ul>
                             <div class="navigation-title">
                                 Menu
