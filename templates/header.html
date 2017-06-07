@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 text-right">
-                                    <a class="button size-2 style-3" href="checkout.html">
+                                    <a class="button size-2 style-3" href="/checkout">
                                         <span class="button-wrapper">
                                             <span class="icon"><img src="../static/img/icons/icon-4.png" alt=""></span>
                                             <span class="text">proceed to checkout</span>
@@ -82,7 +82,7 @@
         <div class="content-margins">
             <div class="row">
                 <div class="col-xs-3 col-sm-1">
-                    <a id="logo" href="/"><img src="img/logo-2.png" alt="" /></a>
+                    <a id="logo" href="index.html"><img src="{{ url_for('static', filename='files/images/favicon.png')}}" alt="">Bibliomart</a>
                 </div>
                 <div class="col-xs-9 col-sm-11 text-right">
                     <div class="nav-wrapper">
@@ -93,18 +93,17 @@
                                     <a href="/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="/books">Products</a>
+                                    <a href="/books">Books</a>
                                     <div class="menu-toggle"></div>
                                     <ul>
                                         {% for i in categories %}
                                         <li>
                                           <a href="/books/{{i.name|lower}}">{{i.name}}</a>
                                         </li>
-                                        <li><a href="/books/{{i.name}}">{{i.name}}</a></li>
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="/">contact</a></li>
+                                <li><a href="/contact">contact</a></li>
                             </ul>
                             <div class="navigation-title">
                                 Menu
@@ -125,6 +124,5 @@
             </div>
         </div>
     </div>
-
 </header>
 <div class="header-empty-space"></div>
