@@ -7,7 +7,7 @@ with app.app_context():
     db.create_all()
     db.session.commit()
 
-#add sample entries
+# add sample entries
 from app import User, Category
 with app.app_context():
     u1 = User("ashna","ashna@bibliomart.com","password","9995903767","admin")
@@ -40,7 +40,7 @@ with app.app_context():
     db.session.add(c4)
 
 
-    b1=
+    # b1=
 
 
     db.session.commit()

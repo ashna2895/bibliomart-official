@@ -48,7 +48,9 @@
                                             </div>
                                         </div>
                                         <div class="preview">
+                                            {% if book.images.all() %}
                                             <img style="height:350px;"src="{{ url_for('static', filename='files/images/%s'%(book.images.all()[0].filename))}}" alt="">
+                                            {% endif %}
                                             <div class="preview-buttons valign-middle">
                                                 <div class="valign-middle-content">
                                                     <a class="button size-2 style-2" href="/book/{{book.id|lower}}">

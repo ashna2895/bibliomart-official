@@ -9,15 +9,19 @@
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/bootstrap.extension.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/swiper.css" rel="stylesheet" type="text/css" />
-    <link href="css/sumoselect.css" rel="stylesheet" type="text/css" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.extension.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/swiper.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/favicon.ico" />
+<<<<<<< HEAD
   	<title>	Your Cart</title>
+=======
+  	<title>Bibliomart Cart</title>
+>>>>>>> origin/cart
 </head>
 <body>
 
@@ -26,6 +30,7 @@
 
     <div id="content-block">
         <!-- HEADER -->
+<<<<<<< HEAD
         <header>
             <div class="header-top">
                 <div class="content-margins">
@@ -486,12 +491,10 @@
 
         <div class="header-empty-space"></div>
 
+=======
+        {% include 'header.html' %}
+>>>>>>> origin/cart
         <div class="container">
-            <div class="empty-space col-xs-b15 col-sm-b30"></div>
-            <div class="breadcrumbs">
-                <a href="#">home</a>
-                <a href="#">shopping cart</a>
-            </div>
             <div class="empty-space col-xs-b15 col-sm-b50 col-md-b100"></div>
             <div class="text-center">
                 <div class="simple-article size-3 grey uppercase col-xs-b5">shopping cart</div>
@@ -506,90 +509,34 @@
             <table class="cart-table">
                 <thead>
                     <tr>
-                        <th style="width: 95px;"></th>
-                        <th>product name</th>
-                        <th style="width: 150px;">price</th>
-                        <th style="width: 260px;">quantity</th>
-                        <th style="width: 70px;">color</th>
-                        <th style="width: 150px;">total</th>
-                        <th style="width: 70px;"></th>
+                        <th class="col-md-3"></th>
+                        <th class="col-md-5">product name</th>
+                        <th class="col-md-3">price</th>
+                        <th class="col-md-1"></th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for book_rel in cart.cart_books %}
                     <tr>
                         <td data-title=" ">
-                            <a class="cart-entry-thumbnail" href="#"><img src="img/product-1.png" alt=""></a>
+                            {% if book_rel.book.images.all() %}
+                            <a class="cart-entry-thumbnail" href="/book/{{book_rel.book.id}}">
+                                <img src="img/product-1.png{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}">
+                            {% endif %}
                         </td>
-                        <td data-title=" "><h6 class="h6"><a href="#">modern beat ht</a></h6></td>
-                        <td data-title="Price: ">$155.00</td>
-                        <td data-title="Quantity: ">
-                            <div class="quantity-select">
-                                <span class="minus"></span>
-                                <span class="number">2</span>
-                                <span class="plus"></span>
-                            </div>
-                        </td>
-                        <td data-title="Color: "><div class="cart-color" style="background: #eee;"></div></td>
-                        <td data-title="Total:">$310.00</td>
+                        <td data-title=" "><h6 class="h6"><a href="/book/{{book_rel.book.id}}">{{book_rel.book.title}}</a></h6></td>
+                        <td data-title="Price: ">₹{{book_rel.book.price if book_rel.book.price else 0}}</td>
                         <td data-title="">
                             <div class="button-close"></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td data-title=" ">
-                            <a class="cart-entry-thumbnail" href="#"><img src="img/product-2.png" alt=""></a>
-                        </td>
-                        <td data-title=" "><h6 class="h6"><a href="#">sport beat atx</a></h6></td>
-                        <td data-title="Price: ">$155.00</td>
-                        <td data-title="Quantity: ">
-                            <div class="quantity-select">
-                                <span class="minus"></span>
-                                <span class="number">1</span>
-                                <span class="plus"></span>
-                            </div>
-                        </td>
-                        <td data-title="Color: "><div class="cart-color" style="background: #eee;"></div></td>
-                        <td data-title="Total:">$310.00</td>
-                        <td data-title="">
-                            <div class="button-close"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-title=" ">
-                            <a class="cart-entry-thumbnail" href="#"><img src="img/product-3.png" alt=""></a>
-                        </td>
-                        <td data-title=" "><h6 class="h6"><a href="#">hipster beat hr</a></h6></td>
-                        <td data-title="Price: ">$155.00</td>
-                        <td data-title="Quantity: ">
-                            <div class="quantity-select">
-                                <span class="minus"></span>
-                                <span class="number">1</span>
-                                <span class="plus"></span>
-                            </div>
-                        </td>
-                        <td data-title="Color: "><div class="cart-color" style="background: #eee;"></div></td>
-                        <td data-title="Total:">$310.00</td>
-                        <td data-title=" ">
-                            <div class="button-close"></div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <div class="empty-space col-xs-b35"></div>
             <div class="row">
-                <div class="col-sm-6 col-md-5 col-xs-b10 col-sm-b0">
-                    <div class="single-line-form">
-                        <input class="simple-input" type="text" value="" placeholder="Enter your coupon code" />
-                        <div class="button size-2 style-3">
-                            <span class="button-wrapper">
-                                <span class="icon"><img src="img/icon-4.png" alt=""></span>
-                                <span class="text">submit</span>
-                            </span>
-                            <input type="submit" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-7 col-sm-text-right">
+                {% if cart.book_count %}
+                <div class="col-sm-6 col-md-7 col-sm-text-right pull-right">
                     <div class="buttons-wrapper">
                         <a class="button size-2 style-2" href="#">
                             <span class="button-wrapper">
@@ -605,38 +552,11 @@
                         </a>
                     </div>
                 </div>
+                {% endif %}
             </div>
             <div class="empty-space col-xs-b35 col-md-b70"></div>
             <div class="row">
-                <div class="col-md-6 col-xs-b50 col-md-b0">
-                    <h4 class="h4 col-xs-b25">calculate shipping</h4>
-                    <select class="SlectBox">
-                        <option disabled="disabled" selected="selected">Choose country for shipping</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                    <div class="empty-space col-xs-b20"></div>
-                    <div class="row m10">
-                        <div class="col-sm-6">
-                            <input class="simple-input" type="text" value="" placeholder="State / Country" />
-                            <div class="empty-space col-xs-b20"></div>
-                        </div>
-                        <div class="col-sm-6">
-                            <input class="simple-input" type="text" value="" placeholder="Postcode / Zip" />
-                            <div class="empty-space col-xs-b20"></div>
-                        </div>
-                    </div>
-                    <div class="button size-2 style-2">
-                        <span class="button-wrapper">
-                            <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                            <span class="text">update totals</span>
-                        </span>
-                        <input type="submit"/>
-                    </div>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-6 pull-right">
                     <h4 class="h4">cart totals</h4>
                     <div class="order-details-entry simple-article size-3 grey uppercase">
                         <div class="row">
@@ -644,7 +564,7 @@
                                 cart subtotal
                             </div>
                             <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">$1195.00</div>
+                                <div class="color">₹{{cart.total_cost if cart.total_cost else 0}}</div>
                             </div>
                         </div>
                     </div>
@@ -664,7 +584,7 @@
                                 order total
                             </div>
                             <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">$1195.00</div>
+                                <div class="color">₹{{cart.total_cost if cart.total_cost else 0}}</div>
                             </div>
                         </div>
                     </div>
@@ -1116,20 +1036,23 @@
 
     </div>
 
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/swiper.jquery.min.js"></script>
-    <script src="js/global.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/global.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
 
     <!-- styled select -->
-    <script src="js/jquery.sumoselect.min.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
 
     <!-- counter -->
-    <script src="js/jquery.classycountdown.js"></script>
-    <script src="js/jquery.knob.js"></script>
-    <script src="js/jquery.throttle.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery.classycountdown.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.knob.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.throttle.js')}}"></script>
 
+    <!-- custom javascript -->
+    <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
     <!-- masonry -->
-    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/isotope.pkgd.min.js')}}"></script>
     <script>
         $(window).load(function(){
             var $container = $('.grid').isotope({

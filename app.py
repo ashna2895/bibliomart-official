@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, url_for, redirect, flash, session, g, send_file, abort
+from flask import (Flask, request, render_template, url_for, redirect, flash, session, g,
+ send_file, abort, make_response)
 from flask_login import LoginManager
 from flask_login import login_user , logout_user , current_user , login_required
 from werkzeug import generate_password_hash, check_password_hash
@@ -10,7 +11,7 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-from models import User, Category, Book, Image
+from models import User, Category, Book, Image, Cart, CartBook
 from models import db
 
 db.init_app(app)
@@ -24,7 +25,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return User.query.get(id)
 
 @app.before_request
 def before_request():
@@ -198,7 +199,7 @@ def admin_verify():
             app.logger.info(request.form)
             formtype = request.form['formtype']
             user_id = request.form['userid']
-            user = User.query.get(int(user_id))
+            user = User.query.get(user_id)
             if formtype == 'approve':
                 user.verified = True
                 db.session.add(user)
@@ -281,33 +282,82 @@ def edituser():
 @app.route('/')
 def index():
     books = Book.query.all()
-    return render_template("index.html",page="home",books=books)
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
+    return render_template("index.html",page="home",books=books, cart=cart)
 
 @app.route('/404')
 def error_404():
     categories = Category.query.all()
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
     return render_template("404.html",page="404",categories=categories)
 
 @app.route('/book/<book_id>', methods = ['GET', 'POST'])
 def book_page(book_id):
-    book = Book.query.get(int(book_id))
+    book = Book.query.get(book_id)
     categories = Category.query.all()
-    return render_template('product.html',page="individual book pages", categories=categories, book=book)
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
+    return render_template('product.html',page="individual book pages", categories=categories, book=book, cart=cart)
 
 @app.route('/books', methods = ['GET', 'POST'])
 @app.route('/books/<category>', methods = ['GET', 'POST'])
 def product_list_page(category=''):
     categories = Category.query.all()
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
     if category:
         selected_category = Category.query.filter_by(name=category)
         if not selected_category:
-            return redirect(urlfor(error_404))
+            return redirect(urlfor('error_404'))
         else:
             books = Book.query.filter(Book.category.has(name=category)).all()
     else:
         books = Book.query.all()
     page = category.capitalize()
-    return render_template('products_list.html',page=page, categories=categories, books=books)
+    return render_template('products_list.html',page=page, categories=categories, books=books, cart=cart)
+
+@app.route('/cart', methods = ['GET', 'POST'])
+def cart():
+    if request.method == 'GET':
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+        categories = Category.query.all()
+        return render_template('cart.html',page="cart", categories=categories, cart=cart)
+    if request.method == 'POST':
+        if not current_user.is_authenticated:
+            return make_response("Login")
+        book_id = request.form['book_id']
+        book = Book.query.get(book_id)
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+            db.session.add(cart)
+            db.session.commit()
+        cart.add_book(book)
+        db.session.commit()
+        resp = make_response("Book added to cart")
+        return resp
 
 
 @app.route('/test/<template>')
