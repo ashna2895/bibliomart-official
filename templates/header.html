@@ -3,8 +3,8 @@
         <div class="content-margins">
             <div class="row">
                 <div class="col-md-5 hidden-xs hidden-sm">
-                    <div class="entry"><b>contact us:</b> <a href="tel:+35235551238745">9876543210</a></div>
-                    <div class="entry"><b>email:</b> <a href="mailto:office@exzo.com">info@bibliomart.com</a></div>
+                    <div class="entry"><b>contact us:</b> <a href="tel:+9876543210">9876543210</a></div>
+                    <div class="entry"><b>email:</b> <a href="mailto:info@bibliomart.com">info@bibliomart.com</a></div>
                 </div>
                 <div class="col-md-7 col-md-text-right">
                     <div class="entry"><a href="#><b>login</b></a>&nbsp; or &nbsp;<a href="#><b>register</b></a></div>
@@ -136,7 +136,9 @@
                                     <div class="menu-toggle"></div>
                                     <ul>
                                         {% for i in categories %}
-                                        <li><a href="#">{{i.name}}</a></li>
+                                        <li>
+                                          <a href="/books/{{i.name|lower}}">{{i.name}}</a>
+                                        </li>
                                         {% endfor %}
                                     </ul>
                                 </li>
