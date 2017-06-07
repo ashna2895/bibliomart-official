@@ -87,9 +87,56 @@
                         </div>
                     </div>
                 </div>
-
-
-
+                <div class="col-md-10" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3>all Users:</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Registerd on</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                        <td>{{user.user_role}}</td>
+                                        <td>{{user.name}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.mobilenumber}}</td>
+                                        <td>{{user.registered_on}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <!--    <div class="col-md-10" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3>All Users:</h3>
+                            <hr/>
+                            {% for user in users %}
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h4>Name:{{user.name}}</h4>
+                                        <h4>Email:{{user.email}}</h4>
+                                        <h4>Mobile No:{{user.mobilenumber}}</h4>
+                                        <h4>Registerd on:{{user.registered_on}}</h4>
+                                        <h4>User role:{{user.user_role}}</h4>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>-->
             </div>
         </div>
     </div>
