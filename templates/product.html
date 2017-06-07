@@ -84,14 +84,14 @@
                             </div>
                             <div class="row m5 col-xs-b40">
                                 <div class="col-sm-12 col-xs-b10 col-sm-b0">
-                                    <a class="button size-2 style-2 block" href="#">
+                                    <button class="button size-2 style-2 block add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
                                         <span class="button-wrapper">
                                             <span class="icon">
                                                 <img src="../static/img/icons/icon-3.png" alt="">
                                             </span>
                                             <span class="text">add to cart</span>
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
                                 <!-- <div class="col-sm-6">
                                     <a class="button size-2 style-1 block noshadow" href="#">
@@ -213,9 +213,27 @@
         </div>
     </div>
 
+    <!-- feedbackModal -->
+    <div class="modal fade slide-up disable-scroll" id="feedbackModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                  <div class="modal-body m-t-20">
+                    <h4 class="no-margin pb-10 text-center" id="feedbackModalHeading"></h4>
+                    <p id="feedbackModalMessage" class="text-center"></p>
+          					<!-- <div class="row">
+          						<button type="button" class="btn btn-primary btn-cons pull-right" data-dismiss="modal">Okay</button>
+          					</div> -->
+                  </div>
+			         </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/global.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
 
     <!-- styled select -->
     <script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
@@ -229,6 +247,9 @@
 
     <script src="{{ url_for('static', filename='js/jquery-ui.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js')}}"></script>
+
+    <!-- custom javaascript -->
+    <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
 
     <script>
     $(document).ready(function(){

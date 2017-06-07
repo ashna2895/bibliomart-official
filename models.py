@@ -1,5 +1,5 @@
 from werkzeug import generate_password_hash
-import datetime
+import datetime, uuid
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,7 +8,7 @@ db = SQLAlchemy()
 class User(db.Model):
 
     __tablename__ = "user"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, unique = True)
     mobilenumber = db.Column(db.String, nullable=False)
@@ -19,8 +19,8 @@ class User(db.Model):
     verified = db.Column(db.Boolean, default = False)
     user_role = db.Column(db.String, nullable=False)
 
-
     def __init__(self, name, email, password, mobilenumber, role):
+        self.id = uuid.uuid4().hex
         self.name = name
         self.email = email
         self.mobilenumber = mobilenumber
@@ -49,14 +49,33 @@ class User(db.Model):
 class Category(db.Model):
     """The database model for Category"""
     __tablename__ = "category"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
     def __init__(self, name):
+        self.id = uuid.uuid4().hex
         self.name = name
 
     def  __repr__(self):
         return '<Category- id: %r - name: %r ->'%(self.id, self.name)
+
+class CartBook(db.Model):
+    __tablename__ = 'cart_book'
+    id = db.Column(db.String, primary_key=True)
+    cart_id = db.Column(db.String, db.ForeignKey('cart.id'), primary_key=True)
+    book_id = db.Column(db.String, db.ForeignKey('book.id'), primary_key=True)
+
+    cart = db.relationship("Cart", backref=db.backref("cart_books", cascade="all, delete-orphan" ))
+    book = db.relationship("Book", backref=db.backref("cart_books", cascade="all, delete-orphan" ))
+
+    def __init__(self, cart, book):
+        self.id = uuid.uuid4().hex
+        self.cart = cart
+        self.book =  book
+
+    def __repr__(self):
+        return '<CartBook {}>'.format(self.cart.user.name+" "+self.book.title)
+
 
 
 
@@ -64,16 +83,22 @@ class Book(db.Model):
     """The database model for Books"""
     __tablename__ = "book"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     title = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
     date_added = db.Column(db.DateTime)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category_id = db.Column(db.String, db.ForeignKey('category.id'))
+
+
     category = db.relationship('Category',backref=db.backref('book', lazy='dynamic'))
     images = db.relationship('Image', backref='book', lazy='dynamic')
-    def __init__(self, title, author, description, price, category_id, ):
+    carts = db.relationship("Cart", secondary="cart_book", viewonly=True)
+
+
+    def __init__(self, title, author, description, price, category_id):
+        self.id = uuid.uuid4().hex
         self.title = title
         self.author = author
         self.description = description
@@ -89,13 +114,14 @@ class Book(db.Model):
 class Image(db.Model):
     """The database model for Images"""
     __tablename__ = "image"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     filename = db.Column(db.String, nullable=False)
     filetype = db.Column(db.String, nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    book_id = db.Column(db.String, db.ForeignKey('book.id'))
     timestamp = db.Column(db.DateTime)
 
     def __init__(self, filename, filetype, book_id):
+        self.id = uuid.uuid4().hex
         self.filename = filename
         self.filetype = filetype
         self.timestamp = datetime.datetime.utcnow()
@@ -104,72 +130,31 @@ class Image(db.Model):
     def __repr__(self):
         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
 
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    id = db.Column(db.String,  primary_key=True, unique=True)
+    user_id = db.Column(db.String,db.ForeignKey('user.id'))
+    total_cost = db.Column(db.Float, default=0)
+    book_count = db.Column(db.Integer, default=0)
 
+    books = db.relationship("Book", secondary="cart_book", viewonly=True)
+    user = db.relationship('User',backref=db.backref('cart', lazy='dynamic'))
 
-# class ConfirmedOrders(db.Model):
-#
-#     __tablename__ = "confirmed_orders"
-#     id = db.Column(db.Integer, primary_key=True)
-#     bookid = db.Column(db.Integer,db.ForeignKey('book.id'))
-#     userid = db.Column(db.Integer,db.ForeignKey('user.id'))
-#     amount = db.Column(db.Integer)
-#     paymentid = db.Column(db.Integer)
-#
-#     def __init__(self, bookid, userid, amount, paymentid):
-#         self.bookid = bookid
-#         self.userid = userid
-#         self.amount = amount
-#         self.paymentid = paymentid
-#
-#
-# class Cart(db.Model):
-#     __tablename__ = "cart"
-#     id = db.Column(db.Integer, primary_key=True)
-#     bookid = db.Column(db.Integer, db.ForeignKey('book.id'))
-#     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     amount = db.Column(db.Float)
-#     items = db.Column(db.Integer)
-#
-#     def __init__(self, bookid, userid, amount, items):
-#         self.bookid = bookid
-#         self.userid = userid
-#         self.amount = amount
-#         self.items = items
-#     def __repr__(self):
-#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
-#
-#
-# class OrderedBooks(db.Model):
-#     """docstring for OrderedBooks."""
-#     __tablename__ = "ordered_books"
-#     id = db.Column(db.Integer, primary_key=True)
-#     name =db.Column(db.String, nullable=False)
-#     order = relationship("Order", secondary="cart",viewonly=True)
-#     def __init__(self, name, order):
-#         self.name = name
-#         self.order = order
-#     def __repr__(self):
-#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
-#
-#
-# class Order(db.Model):
-#     """docstring for Order."""
-#     __tablename__ = "order"
-#     id = db.Column(db.Integer, primary_key=True)
-#     name =db.Column(db.String, nullable=False)
-#     ordered_books =relationship("OrderedBooks", secondary="cart",viewonly=True)
-#
-#     def __init__(self, name, ordered_books):
-#         self.name = name
-#         self.ordered_books = ordered_books
-#     def __repr__(self):
-#         return '<id: %r - filename: %r - filetype: %r>'%(self.id, self.filename, self.filetype)
+    def add_book(self, book):
+        self.cart_books.append(CartBook(cart=self, book=book))
+        self.total_cost += book.price
+        self.book_count += 1
+
+    def __init__(self, user_id):
+        self.id = uuid.uuid4().hex
+        self.user_id = user_id
+
 
 
 # class Comments(db.Model):
 #     """docstring for comments ."""
 #     __tablename__="comments"
-#     id = db.Column(db.Integer, primary_key=True)
+#     id = db.Column(db.String, primary_key=True)
 #     name = db.Column(db.String,db.ForeignKey('user.id'))
 #     email = db.Column(db.String,db.ForeignKey('user.email'))
 #     comment = db.Column(db.String)
