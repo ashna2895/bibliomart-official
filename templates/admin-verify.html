@@ -50,8 +50,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{url_for('admin_approve_orders')}}">
-                                Approve Orders
+                            <a href="{{url_for('admin_confirmed_orders')}}">
+                                Confirmed Orders
                             </a>
                         </li>
                     </ul>
@@ -72,14 +72,13 @@
                                 </thead>
                                 <tbody>
                                     {% for user in unverifiedusers %}
-                                    <tr>
+                                    <tr class="{{'warning' if user.user_role=='teacher' else 'active'}}">
                                         <td>{{user.user_role}}</td>
                                         <td>{{user.name}}</td>
                                         <td>{{user.email}}</td>
                                         <td>{{user.mobilenumber}}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-success btn-sm" userid="{{user.id}}">Approve</button>
-                                            <button type="submit" class="btn btn-warning btn-sm" userid="{{user.id}}">Reject</button>
+                                            <button type="submit" class="btn btn-success btn-sm" userid="{{user.id}}">Approve</button> <button type="submit" class="btn btn-warning btn-sm" userid="{{user.id}}">Reject</button>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -91,7 +90,7 @@
                 <div class="col-md-10" >
                     <div class="panel">
                         <div class="panel-body">
-                            <h3>All Users:</h3>
+                            <h3>all Users:</h3>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -103,8 +102,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    {% for user in verifiedusers %}
+                                    {% for user in users %}
                                         <td>{{user.user_role}}</td>
                                         <td>{{user.name}}</td>
                                         <td>{{user.email}}</td>

@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-from models import User, Category, Book, Image, Cart, CartBook, Order
+from models import User, Category, Book, Image, Cart, CartBook
 from models import db
 
 db.init_app(app)
@@ -157,7 +157,7 @@ def add_book():
                 app.logger.info(repr(f.content_type))
                 if f.__dict__['filename'] == '':
                     continue
-                filename = "img%s_%s"%(book_id,f.__dict__['filename'])
+                filename = "img%d_%s"%(book_id,f.__dict__['filename'])
                 if f.content_type[:5] == 'image':
                     filetype = 'image'
                     f.save(os.path.join(app.config['IMAGE_FOLDER'], filename))
@@ -183,39 +183,20 @@ def add_category():
         db.session.commit()
 
         flash('Category added successfully' , 'success')
-    categories = Category.query.all()
-    return render_template('add_category.html',page="category",categories=categories)
 
-@app.route('/admin/approve_orders',methods=['GET','POST'])
+    return render_template('add_category.html',page="category")
+
+@app.route('/admin/confirmed_orders')
 @login_required
-def admin_approve_orders():
-    if g.user.is_admin:
-        if request.method == 'POST':
-            formtype = request.form['formtype']
-            order_id = request.form['orderId']
-            order = Order.query.get(order_id)
-            if formtype == 'approve':
-                order.is_approved = True
-            elif formtype == 'cancel':
-                order.is_cancelled = True
-            db.session.add(order)
-            db.session.commit()
-            return redirect(url_for('admin_approve_orders'))
-
-        unapproved_orders = Order.query.filter_by(is_approved=False, is_cancelled=False).all()
-        cancelled_orders = Order.query.filter_by(is_cancelled=True).all()
-        approved_orders = Order.query.filter_by(is_approved=True).all()
-        return render_template(
-            "admin-approve-orders.html", page="admin_approve_orders",
-            approved_orders=approved_orders,unapproved_orders=unapproved_orders,
-            cancelled_orders=cancelled_orders
-        )
+def admin_confirmed_orders():
+    return render_template("admin-confirmed-orders.html", page="admin_confirmed_orders")
 
 @app.route('/admin/verify',methods=['GET','POST'])
 @login_required
 def admin_verify():
     if g.user.is_admin:
         if request.method == 'POST':
+            app.logger.info(request.form)
             formtype = request.form['formtype']
             user_id = request.form['userid']
             user = User.query.get(user_id)
@@ -228,11 +209,11 @@ def admin_verify():
             db.session.commit()
             return redirect(url_for('admin_verify'))
 
+        categories = Category.query.all()
         unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
-        verifiedusers = User.query.filter_by(verified=True).order_by(User.id.desc()).all()
         return render_template(
             'admin-verify.html', unverifiedusers = unverifiedusers,
-            page="admin_user_verify",verifiedusers=verifiedusers
+            categories=categories,page="admin_user_verify"
         )
 
 @app.route('/user/edit',methods=['GET','POST'])
@@ -366,62 +347,17 @@ def cart():
     if request.method == 'POST':
         if not current_user.is_authenticated:
             return make_response("Login")
-        if request.form['type'] == 'AddBook':
-            book_id = request.form['book_id']
-            book = Book.query.get(book_id)
-            cart = g.user.cart.first()
-            if not cart:
-                cart = Cart(g.user.id)
-                db.session.add(cart)
-                db.session.commit()
-            cart.add_book(book)
-            db.session.commit()
-            resp = make_response("Book added to cart")
-        if request.form['type'] == 'RemoveBook':
-            book_id = request.form['book_id']
-            book = Book.query.get(book_id)
-            cart = g.user.cart.first()
-            cart.remove_book(book)
-            db.session.commit()
-            resp = make_response("Book removed from cart")
-        return resp
-
-@app.route('/orders')
-def orders():
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    cart = g.user.cart.first()
-    if not cart:
-        cart = Cart(g.user.id)
-    orders = g.user.order.all()
-    categories = Category.query.all()
-    return render_template("orders.html",page="orders", orders=orders, cart=cart, categories=categories)
-
-@app.route('/checkout', methods = ['GET', 'POST'])
-def checkout():
-    if request.method == 'POST':
-        form_data = request.form
+        book_id = request.form['book_id']
+        book = Book.query.get(book_id)
         cart = g.user.cart.first()
-        if not cart or cart.book_count<1:
-            resp = make_response("Cart Empty")
-        order = Order(g.user.id, form_data['name'], form_data['address'],
-            form_data['state'], form_data['city'], form_data['pincode'],
-            form_data['landmark'], form_data['phone'])
-        db.session.add(order)
+        if not cart:
+            cart = Cart(g.user.id)
+            db.session.add(cart)
+            db.session.commit()
+        cart.add_book(book)
         db.session.commit()
-        for cb in cart.cart_books:
-            order.add_book(cb.book)
-        db.session.delete(cart)
-        db.session.commit()
-        return redirect(url_for('orders'))
-
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    cart = g.user.cart.first()
-    if not cart:
-        return redirect(url_for('cart'))
-    categories = Category.query.all()
-    return render_template("checkout.html",page="checkout", cart=cart, categories=categories)
+        resp = make_response("Book added to cart")
+        return resp
 
 
 @app.route('/test/<template>')

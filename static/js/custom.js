@@ -1,25 +1,9 @@
 $('.add-cart-button').on('click',function(){
+    console.log('here');
     var postData = {
         book_id : $(this).attr('bookId'),
         _csrf_token : $(this).attr('csrfToken'),
-        type : 'AddBook'
-    }
-    postCartData(postData);
-});
-
-$('.remove-cart-button').on('click',function(){
-    var postData = {
-        book_id : $(this).attr('bookId'),
-        _csrf_token : $(this).attr('csrfToken'),
-        type : 'RemoveBook'
-    }
-    postCartData(postData);
-});
-
-$('.place-order-button').on('click',function(){
-    var postData = {
-        _csrf_token : $(this).attr('csrfToken'),
-        type : 'PlaceOrder'
+        type : 'add'
     }
     postCartData(postData);
 });

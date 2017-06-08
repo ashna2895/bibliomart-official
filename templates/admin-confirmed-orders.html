@@ -29,7 +29,7 @@
                 <div class="col-md-2" >
                     <h3></h3>
                     <ul class="nav nav-sidebar">
-                        <li class="active">
+                        <li>
                             <a href="{{url_for('admin_verify')}}">
                                 Verify Users
                             </a>
@@ -45,44 +45,36 @@
                             </a>
                         </li>
                         <li>
+
                             <a href="{{url_for('add_category')}}">
                                 Add Category
                             </a>
                         </li>
                         <li>
+                        <li class="active">
                             <a href="{{url_for('admin_confirmed_orders')}}">
                                 Confirmed Orders
                             </a>
                         </li>
+
+
                     </ul>
                 </div>
                 <div class="col-md-10" >
                     <div class="panel">
                         <div class="panel-body">
-                            <h3>Verify Accounts:</h3>
+                            <h3>Confirmed Orders:</h3>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Action</th>
+                                        <th>Book</th>
+                                        <th>Purchased by</th>
+                                        <th>Amount</th>
+                                        <th>Payment Details</th>
+
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {% for user in unverifiedusers %}
-                                    <tr class="{{'warning' if user.user_role=='teacher' else 'active'}}">
-                                        <td>{{user.user_role}}</td>
-                                        <td>{{user.name}}</td>
-                                        <td>{{user.email}}</td>
-                                        <td>{{user.mobilenumber}}</td>
-                                        <td>
-                                            <button type="submit" class="btn btn-success btn-sm" userid="{{user.id}}">Approve</button> <button type="submit" class="btn btn-warning btn-sm" userid="{{user.id}}">Reject</button>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
+
                             </table>
                         </div>
                     </div>

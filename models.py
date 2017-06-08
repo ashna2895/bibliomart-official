@@ -76,23 +76,6 @@ class CartBook(db.Model):
     def __repr__(self):
         return '<CartBook {}>'.format(self.cart.user.name+" "+self.book.title)
 
-class OrderBook(db.Model):
-    __tablename__ = 'order_book'
-    id = db.Column(db.String, primary_key=True)
-    order_id = db.Column(db.String, db.ForeignKey('order.id'), primary_key=True)
-    book_id = db.Column(db.String, db.ForeignKey('book.id'), primary_key=True)
-
-    order = db.relationship("Order", backref=db.backref("order_books", cascade="all, delete-orphan" ))
-    book = db.relationship("Book", backref=db.backref("order_books", cascade="all, delete-orphan" ))
-
-    def __init__(self, order, book):
-        self.id = uuid.uuid4().hex
-        self.order = order
-        self.book =  book
-
-    def __repr__(self):
-        return '<OrderBook {}>'.format(self.order.user.name+" "+self.book.title)
-
 
 
 
@@ -112,7 +95,6 @@ class Book(db.Model):
     category = db.relationship('Category',backref=db.backref('book', lazy='dynamic'))
     images = db.relationship('Image', backref='book', lazy='dynamic')
     carts = db.relationship("Cart", secondary="cart_book", viewonly=True)
-    orders = db.relationship("Order", secondary="order_book", viewonly=True)
 
 
     def __init__(self, title, author, description, price, category_id):
@@ -152,68 +134,20 @@ class Cart(db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.String,  primary_key=True, unique=True)
     user_id = db.Column(db.String,db.ForeignKey('user.id'))
-    total_price = db.Column(db.Float, default=0)
+    total_cost = db.Column(db.Float, default=0)
     book_count = db.Column(db.Integer, default=0)
-    shipping_charge = db.Column(db.Float, default=0)
 
     books = db.relationship("Book", secondary="cart_book", viewonly=True)
     user = db.relationship('User',backref=db.backref('cart', lazy='dynamic'))
 
     def add_book(self, book):
         self.cart_books.append(CartBook(cart=self, book=book))
-        self.total_price += book.price
+        self.total_cost += book.price
         self.book_count += 1
-
-    def remove_book(self, book):
-        self.cart_books = [cb for cb in self.cart_books if cb.book_id != book.id]
-        self.total_price -= book.price
-        self.book_count -= 1
 
     def __init__(self, user_id):
         self.id = uuid.uuid4().hex
         self.user_id = user_id
-
-class Order(db.Model):
-    __tablename__ = 'order'
-    id = db.Column(db.String,  primary_key=True, unique=True)
-    user_id = db.Column(db.String,db.ForeignKey('user.id'))
-    total_price = db.Column(db.Float, default=0)
-    book_count = db.Column(db.Integer, default=0)
-    shipping_name = db.Column(db.String)
-    shipping_address = db.Column(db.String)
-    shipping_city = db.Column(db.String)
-    shipping_state = db.Column(db.String)
-    shipping_pincode = db.Column(db.String)
-    shipping_landmark = db.Column(db.String)
-    shipping_phone = db.Column(db.String)
-
-    is_approved = db.Column(db.Boolean, default = False)
-    is_cancelled = db.Column(db.Boolean, default = False)
-
-    books = db.relationship("Book", secondary="order_book", viewonly=True)
-    user = db.relationship('User',backref=db.backref('order', lazy='dynamic'))
-
-    def add_book(self, book):
-        self.order_books.append(OrderBook(order=self, book=book))
-        self.total_price += book.price
-        self.book_count += 1
-
-    def remove_book(self, book):
-        self.order_books = [cb for cb in self.order_books if cb.book_id != book.id]
-        self.total_price -= book.price
-        self.book_count -= 1
-
-    def __init__(self, user_id,shipping_name,shipping_address,shipping_state,
-        shipping_city,shipping_pincode,shipping_landmark,shipping_phone):
-        self.id = uuid.uuid4().hex
-        self.user_id = user_id
-        self.shipping_name = shipping_name
-        self.shipping_address = shipping_address
-        self.shipping_state = shipping_state
-        self.shipping_city = shipping_city
-        self.shipping_pincode = shipping_pincode
-        self.shipping_landmark = shipping_landmark
-        self.shipping_phone = shipping_phone
 
 
 

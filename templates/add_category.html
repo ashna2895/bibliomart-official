@@ -55,8 +55,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url_for('admin_approve_orders')}}">
-                            Approve Orders
+                    <a href="{{url_for('admin_confirmed_orders')}}">
+                            Confirmed Orders
                     </a>
                 </li>
               </ul>
@@ -89,21 +89,19 @@
                 <div class="col-md-10" >
                     <div class="panel">
                         <div class="panel-body">
-                            <h3>All Category:</h3>
-                            <table class="table table-hover">
-                                <!-- <thead>
-                                    <tr>
-                                        <th>Category Name</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    {% for category in categories %}
-                                    <tr>
-                                        <td>{{category.name}}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                            <h3>All Categories:</h3>
+                            <hr/>
+                            {% for category in categories %}
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h4>{{category.name}}</h4>
+                                        
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
