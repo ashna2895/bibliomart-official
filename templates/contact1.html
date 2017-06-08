@@ -9,24 +9,15 @@
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet">
 
-    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/bootstrap.extension.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/swiper.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.extension.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/swiper.css" rel="stylesheet" type="text/css" />
+    <link href="css/sumoselect.css" rel="stylesheet" type="text/css" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-<<<<<<< HEAD
     <link rel="shortcut icon" href="img/favicon.ico" />
-<!-- <<<<<<< HEAD -->
-  	<title>	Your Cart</title>
-<!-- ======= -->
-  	<title>Bibliomart Cart</title>
-<!-- >>>>>>> origin/cart -->
-=======
-    <link rel="shortcut icon" href="../static/img/favicon.ico" />
-  	<title>My Cart</title>
->>>>>>> master
+  	<title>EX ZO</title>
 </head>
 <body>
 
@@ -35,8 +26,6 @@
 
     <div id="content-block">
         <!-- HEADER -->
-<<<<<<< HEAD
-<!-- <<<<<<< HEAD -->
         <header>
             <div class="header-top">
                 <div class="content-margins">
@@ -497,138 +486,395 @@
 
         <div class="header-empty-space"></div>
 
-=======
-=======
->>>>>>> master
-        {% include 'header.html' %}
-        <div class="container">
-            <div class="empty-space col-xs-b15 col-sm-b50 col-md-b100"></div>
-            <div class="text-center">
-                <div class="simple-article size-3 grey uppercase col-xs-b5">shopping cart</div>
-                <div class="h2">check your products</div>
-                <div class="title-underline center"><span></span></div>
+        <div class="block-entry fixed-background" style="background-image: url(img/background-26.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="cell-view simple-banner-height text-center">
+                            <div class="empty-space col-xs-b35 col-sm-b70"></div>
+                            <h1 class="h1 light">contact us</h1>
+                            <div class="title-underline center"><span></span></div>
+                            <div class="simple-article light transparent size-4">In feugiat molestie tortor a malesuada. Etiam a venenatis ipsum. Proin pharetra elit at feugiat commodo vel placerat tincidunt sapien nec</div>
+                            <div class="empty-space col-xs-b35 col-sm-b70"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="empty-space col-xs-b35 col-md-b70"></div>
+        <div class="empty-space col-xs-b35 col-md-b70"></div>
 
         <div class="container">
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th class="col-md-3"></th>
-                        <th class="col-md-5">product name</th>
-                        <th class="col-md-3">price</th>
-                        <th class="col-md-1"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for book_rel in cart.cart_books %}
-                    <tr>
-                        <td data-title=" ">
-                            {% if book_rel.book.images.all() %}
-                            <a class="cart-entry-thumbnail" href="/book/{{book_rel.book.id}}">
-                                <img style="width:70px" src="{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}">
+            <div class="text-center">
+                <div class="simple-article size-3 grey uppercase col-xs-b5">our contacts</div>
+                <div class="h2">we ready for your questions</div>
+                <div class="title-underline center"><span></span></div>
+            </div>
+        </div>
+
+        <div class="empty-space col-sm-b15 col-md-b50"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+                        <img class="icon" src="img/icon-25.png" alt="">
+                        <div class="title h6">address</div>
+                        <div class="description simple-article size-2">1st, new york, usa</div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+                        <img class="icon" src="img/icon-23.png" alt="">
+                        <div class="title h6">phone</div>
+                        <div class="description simple-article size-2" style="line-height: 26px;">
+                            <a href="tel:+35235551238745">+3  (523) 555 123 8745</a>
+                            <br/>
+                            <a href="tel:+35235557585238">+3  (523) 555 758 5238</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+                        <img class="icon" src="img/icon-28.png" alt="">
+                        <div class="title h6">email</div>
+                        <div class="description simple-article size-2"><a href="mailto:offce@exzo.com">offce@exzo.com</a></div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+                        <img class="icon" src="img/icon-26.png" alt="">
+                        <div class="title h6">Follow us</div>
+                        <div class="follow light">
+                            <a class="entry" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="entry" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="entry" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a class="entry" href="#"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-space col-xs-b25 col-sm-b50"></div>
+
+        <div class="container">
+            <div class="map-wrapper">
+                <div id="map-canvas" class="full-width" data-lat="34.0151244" data-lng="-118.4729871" data-zoom="14"></div>
+            </div>
+            <div class="addresses-block hidden">
+                <a class="marker" data-lat="34.0151244" data-lng="-118.4729871" data-string="1. Here is some address or email or phone or something else..."></a>
+            </div>
+        </div>
+
+        <div class="empty-space col-xs-b25 col-sm-b50"></div>
+
+        <div class="container">
+            <h4 class="h4 text-center col-xs-b25">have a questions?</h4>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <form class="contact-form">
+                        <div class="row m5">
+                            <div class="col-sm-6">
+                                <input class="simple-input col-xs-b20" type="text" value="" placeholder="Name" name="name" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="simple-input col-xs-b20" type="text" value="" placeholder="Email" name="email" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="simple-input col-xs-b20" type="text" value="" placeholder="Phone" name="phone" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="simple-input col-xs-b20" type="text" value="" placeholder="Subject" name="subject" />
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea class="simple-input col-xs-b20" placeholder="Your message" name="message"></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <div class="button size-2 style-3">
+                                        <span class="button-wrapper">
+                                            <span class="icon"><img src="img/icon-4.png" alt=""></span>
+                                            <span class="text">send message</span>
+                                        </span>
+                                        <input type="submit"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-space col-xs-b35 col-md-b70"></div>
+        <div class="empty-space col-xs-b35 col-md-b70"></div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 col-xs-b30 col-md-b0">
+                            <img src="img/logo-1.png" alt="" />
+                            <div class="empty-space col-xs-b20"></div>
+                            <div class="simple-article size-2 light fulltransparent">Integer posuere orci sit amet feugiat pellent que. Suspendisse vel tempor justo, sit amet posuere orci dapibus auctor</div>
+                            <div class="empty-space col-xs-b20"></div>
+                            <div class="footer-contact"><i class="fa fa-mobile" aria-hidden="true"></i> contact us: <a href="tel:+35235551238745">+3  (523) 555 123 8745</a></div>
+                            <div class="footer-contact"><i class="fa fa-envelope-o" aria-hidden="true"></i> email: <a href="mailto:office@exzo.com">office@exzo.com</a></div>
+                            <div class="footer-contact"><i class="fa fa-map-marker" aria-hidden="true"></i> address: <a href="#">1st, new york, usa</a></div>
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-xs-b30 col-md-b0">
+                            <h6 class="h6 light">queck links</h6>
+                            <div class="empty-space col-xs-b20"></div>
+                            <div class="footer-column-links">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#">home</a>
+                                        <a href="#">about us</a>
+                                        <a href="#">products</a>
+                                        <a href="#">services</a>
+                                        <a href="#">blog</a>
+                                        <a href="#">gallery</a>
+                                        <a href="#">contact</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="#">privacy policy</a>
+                                        <a href="#">warranty</a>
+                                        <a href="#">login</a>
+                                        <a href="#">registration</a>
+                                        <a href="#">delivery</a>
+                                        <a href="#">pages</a>
+                                        <a href="#">our stores</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear visible-sm"></div>
+                        <div class="col-sm-6 col-md-3 col-xs-b30 col-sm-b0">
+                            <h6 class="h6 light">some posts</h6>
+                            <div class="empty-space col-xs-b20"></div>
+                            <div class="footer-post-preview clearfix">
+                                <a class="image" href="#"><img src="img/thumbnail-1.jpg" alt="" /></a>
+                                <div class="description">
+                                    <div class="date">apr 07 / 15</div>
+                                    <a class="title">Fusce tincidunt accumsan pretium sit amet</a>
+                                </div>
+                            </div>
+                            <div class="footer-post-preview clearfix">
+                                <a class="image" href="#"><img src="img/thumbnail-2.jpg" alt="" /></a>
+                                <div class="description">
+                                    <div class="date">apr 07 / 15</div>
+                                    <a class="title">Fusce tincidunt accumsan pretium sit amet</a>
+                                </div>
+                            </div>
+                            <div class="footer-post-preview clearfix">
+                                <a class="image" href="#"><img src="img/thumbnail-3.jpg" alt="" /></a>
+                                <div class="description">
+                                    <div class="date">apr 07 / 15</div>
+                                    <a class="title">Fusce tincidunt accumsan pretium sit amet</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <h6 class="h6 light">popular tags</h6>
+                            <div class="empty-space col-xs-b20"></div>
+                            <div class="tags clearfix">
+                                <a class="tag">headphoness</a>
+                                <a class="tag">accessories</a>
+                                <a class="tag">new</a>
+                                <a class="tag">wireless</a>
+                                <a class="tag">cables</a>
+                                <a class="tag">devices</a>
+                                <a class="tag">gadgets</a>
+                                <a class="tag">brands</a>
+                                <a class="tag">replacements</a>
+                                <a class="tag">cases</a>
+                                <a class="tag">cables</a>
+                                <a class="tag">professional</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="row">
+                        <div class="col-lg-8 col-xs-text-center col-lg-text-left col-xs-b20 col-lg-b0">
+                            <div class="copyright">&copy; 2015 All rights reserved. Development by <a href="http://themeforest.net/user/unionagency" target="_blank">UnionAgency</a></div>
+                            <div class="follow">
+                                <a class="entry" href="#"><i class="fa fa-facebook"></i></a>
+                                <a class="entry" href="#"><i class="fa fa-twitter"></i></a>
+                                <a class="entry" href="#"><i class="fa fa-linkedin"></i></a>
+                                <a class="entry" href="#"><i class="fa fa-google-plus"></i></a>
+                                <a class="entry" href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xs-text-center col-lg-text-right">
+                            <div class="footer-payment-icons">
+                                <a class="entry"><img src="img/thumbnail-4.jpg" alt="" /></a>
+                                <a class="entry"><img src="img/thumbnail-5.jpg" alt="" /></a>
+                                <a class="entry"><img src="img/thumbnail-6.jpg" alt="" /></a>
+                                <a class="entry"><img src="img/thumbnail-7.jpg" alt="" /></a>
+                                <a class="entry"><img src="img/thumbnail-8.jpg" alt="" /></a>
+                                <a class="entry"><img src="img/thumbnail-9.jpg" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="popup-wrapper">
+        <div class="bg-layer"></div>
+
+        <div class="popup-content" data-rel="1">
+            <div class="layer-close"></div>
+            <div class="popup-container size-1">
+                <div class="popup-align">
+                    <h3 class="h3 text-center">Log in</h3>
+                    <div class="empty-space col-xs-b30"></div>
+                    <input class="simple-input" type="text" value="" placeholder="Your email" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <input class="simple-input" type="password" value="" placeholder="Enter password" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-b10 col-sm-b0">
+                            <div class="empty-space col-sm-b5"></div>
+                            <a class="simple-link">Forgot password?</a>
+                            <div class="empty-space col-xs-b5"></div>
+                            <a class="simple-link">register now</a>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <a class="button size-2 style-3" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">submit</span>
+                                </span>
                             </a>
-                            {% endif %}
-                        </td>
-                        <td data-title=" "><h6 class="h6"><a href="/book/{{book_rel.book.id}}">{{book_rel.book.title}}</a></h6></td>
-                        <td data-title="Price: ">₹{{book_rel.book.price if book_rel.book.price else 0}}</td>
-                        <td data-title="">
-                            <div class="button-close remove-cart-button" bookId="{{book_rel.book.id}}" csrfToken="{{ csrf_token() }}"></div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <div class="empty-space col-xs-b35"></div>
-            <div class="empty-space col-xs-b35 col-md-b70"></div>
-            <div class="row">
-                <div class="col-md-6 pull-right">
-                    <h4 class="h4">cart totals</h4>
-                    <div class="order-details-entry simple-article size-3 grey uppercase">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                cart subtotal
-                            </div>
-                            <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">₹{{cart.total_price if cart.total_price else 0}}</div>
-                            </div>
                         </div>
                     </div>
-                    <div class="order-details-entry simple-article size-3 grey uppercase">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                shipping and handling
-                            </div>
-                            <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">{{'₹' + str(cart.shipping_charge) if cart.shipping_charge else 'Free Shipping'}}</div>
-                            </div>
-                        </div>
+                    <div class="popup-or">
+                        <span>or</span>
                     </div>
-                    <div class="order-details-entry simple-article size-3 grey uppercase">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                order total
-                            </div>
-                            <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">₹{{cart.total_price+cart.shipping_charge if cart.total_price else 0}}</div>
-                            </div>
+                    <div class="row m5">
+                        <div class="col-sm-4 col-xs-b10 col-sm-b0">
+                            <a class="button facebook-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">facebook</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-sm-4 col-xs-b10 col-sm-b0">
+                            <a class="button twitter-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">twitter</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="button google-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">google+</span>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
+                <div class="button-close"></div>
             </div>
-            <div class="empty-space col-xs-b35 col-md-b70"></div>
-            <div class="row">
-                {% if cart.book_count %}
-                <div class="col-sm-6 col-md-7 col-sm-text-right pull-right">
-                    <div class="buttons-wrapper">
-                        <a class="button size-2 style-3" href="checkout">
-                            <span class="button-wrapper">
-                                <span class="icon"><img src="../static/img/icons/icon-4.png" alt=""></span>
-                                <span class="text">proceed to checkout</span>
-                            </span>
-                        </a>
+        </div>
+
+        <div class="popup-content" data-rel="2">
+            <div class="layer-close"></div>
+            <div class="popup-container size-1">
+                <div class="popup-align">
+                    <h3 class="h3 text-center">register</h3>
+                    <div class="empty-space col-xs-b30"></div>
+                    <input class="simple-input" type="text" value="" placeholder="Your name" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <input class="simple-input" type="text" value="" placeholder="Your email" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <input class="simple-input" type="password" value="" placeholder="Enter password" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <input class="simple-input" type="password" value="" placeholder="Repeat password" />
+                    <div class="empty-space col-xs-b10 col-sm-b20"></div>
+                    <div class="row">
+                        <div class="col-sm-7 col-xs-b10 col-sm-b0">
+                            <div class="empty-space col-sm-b15"></div>
+                            <label class="checkbox-entry">
+                                <input type="checkbox" /><span><a href="#">Privacy policy agreement</a></span>
+                            </label>
+                        </div>
+                        <div class="col-sm-5 text-right">
+                            <a class="button size-2 style-3" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">submit</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="popup-or">
+                        <span>or</span>
+                    </div>
+                    <div class="row m5">
+                        <div class="col-sm-4 col-xs-b10 col-sm-b0">
+                            <a class="button facebook-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">facebook</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-sm-4 col-xs-b10 col-sm-b0">
+                            <a class="button twitter-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">twitter</span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="button google-button size-2 style-4 block" href="#">
+                                <span class="button-wrapper">
+                                    <span class="icon"><img src="img/icon-4.png" alt="" /></span>
+                                    <span class="text">google+</span>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                {% endif %}
+                <div class="button-close"></div>
             </div>
-            <div class="empty-space col-xs-b35 col-md-b70"></div>
-            <div class="empty-space col-xs-b35 col-md-b70"></div>
         </div>
 
 
     </div>
 
-
-
-    <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/global.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/swiper.jquery.min.js"></script>
+    <script src="js/global.js"></script>
 
     <!-- styled select -->
-    <script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
+    <script src="js/jquery.sumoselect.min.js"></script>
 
     <!-- counter -->
-    <script src="{{ url_for('static', filename='js/jquery.classycountdown.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.knob.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.throttle.js')}}"></script>
+    <script src="js/jquery.classycountdown.js"></script>
+    <script src="js/jquery.knob.js"></script>
+    <script src="js/jquery.throttle.js"></script>
 
-    <!-- custom javascript -->
-    <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
-    <!-- masonry -->
-    <script src="{{ url_for('static', filename='js/isotope.pkgd.min.js')}}"></script>
-    <script>
-        $(window).load(function(){
-            var $container = $('.grid').isotope({
-                itemSelector: '.grid-item',
-                masonry: {
-                    columnWidth: '.grid-sizer'
-                }
-            });
-        });
-    </script>
+    <!-- MAP -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/map.js"></script>
+
+    <!-- CONTACT -->
+    <script src="js/contact.form.js"></script>
+
+
 
 </body>
 </html>

@@ -11,8 +11,8 @@
                     <div class="entry"><a href="/login"><b>login</b></a>&nbsp; or &nbsp;<a href="/register"><b>register</b></a></div>
                     {% else %}
                     <div class="entry"><a href="/logout"><b>logout</b></a></div>
+                    <div class="entry"><a href="/orders"><b>My Orders</b></a></div>
                     {% endif %}
-                    <div class="entry hidden-xs hidden-sm"><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></div>
                     <div class="entry hidden-xs hidden-sm cart">
                         <a href="/cart">
                             <b class="hidden-xs">Your bag</b>
@@ -20,7 +20,7 @@
                                 <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                 <span class="cart-label">{{cart.book_count if cart.book_count else 0}}</span>
                             </span>
-                            <span class="cart-title hidden-xs">₹{{cart.total_cost if cart.total_cost else 0}}</span>
+                            <span class="cart-title hidden-xs">₹{{cart.total_price if cart.total_price else 0}}</span>
                         </a>
                         {% if cart.book_count %}
                         <div class="cart-toggle hidden-xs hidden-sm">
@@ -28,7 +28,9 @@
                                 {% for book_rel in cart.cart_books %}
                                 <div class="cart-entry clearfix">
                                     {% if book_rel.book.images.all() %}
-                                    <a class="cart-entry-thumbnail" href="/book/{{book_rel.book.id}}"><img src="img/product-1.png{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}" alt="" /></a>
+                                    <a class="cart-entry-thumbnail" href="/book/{{book_rel.book.id}}">
+                                        <img style="width:70px" src="{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}" alt="" />
+                                    </a>
                                     {% endif %}
                                     <div class="cart-entry-description">
                                         <table>
@@ -42,7 +44,7 @@
                                                     <div class="simple-article size-3 grey">₹{{book_rel.book.price if book_rel.book.price else 0}}</div>
                                                 </td>
                                                 <td>
-                                                    <div class="button-close"></div>
+                                                    <div class="button-close remove-cart-button" bookId="{{book_rel.book.id}}" csrfToken="{{ csrf_token() }}"></div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -54,11 +56,15 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="cell-view empty-space col-xs-b50">
-                                        <div class="simple-article size-5 grey">TOTAL <span class="color">₹{{cart.total_cost if cart.total_cost else 0}}</span></div>
+                                        <div class="simple-article size-5 grey">TOTAL <span class="color">₹{{cart.total_price if cart.total_price else 0}}</span></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 text-right">
+<<<<<<< HEAD
                                     <a class="button size-2 style-3" href="{{ url_for('logout')}}">
+=======
+                                    <a class="button size-2 style-3" href="/checkout">
+>>>>>>> master
                                         <span class="button-wrapper">
                                             <span class="icon"><img src="../static/img/icons/icon-4.png" alt=""></span>
                                             <span class="text">proceed to checkout</span>
@@ -90,24 +96,20 @@
                         <nav>
                             <ul>
                                 <li class="active">
-                                    <a href="index.html">Home</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="products1.html">Books</a>
+                                    <a href="/books">Books</a>
                                     <div class="menu-toggle"></div>
                                     <ul>
                                         {% for i in categories %}
-<!-- <<<<<<< HEAD -->
                                         <li>
-                                          <a href="/books/{{i.name|lower}}">{{i.name}}</a>
+                                          <a href="/books/{{i.name}}">{{i.name}}</a>
                                         </li>
-<!-- ======= -->
-                                        <li><a href="/books/{{i.name}}">{{i.name}}</a></li>
-<!-- >>>>>>> origin/cart -->
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="contactus.html">contact</a></li>
+                                <li><a href="/contact">contact</a></li>
                             </ul>
                             <div class="navigation-title">
                                 Menu
@@ -128,6 +130,5 @@
             </div>
         </div>
     </div>
-
 </header>
 <div class="header-empty-space"></div>
