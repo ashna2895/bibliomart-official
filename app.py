@@ -50,7 +50,7 @@ def login():
         if g.user is not None and g.user.is_authenticated:
             return redirect(url_for('index'))
         return render_template('login.html',page="login")
-
+    
     elif request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
