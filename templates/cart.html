@@ -16,7 +16,7 @@
     <link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="shortcut icon" href="../static/img/favicon.ico" />
   	<title>My Cart</title>
 </head>
 <body>
@@ -45,7 +45,7 @@
                         <th class="col-md-3"></th>
                         <th class="col-md-5">product name</th>
                         <th class="col-md-3">price</th>
-                        <!-- <th class="col-md-1"></th> -->
+                        <th class="col-md-1"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,39 +54,20 @@
                         <td data-title=" ">
                             {% if book_rel.book.images.all() %}
                             <a class="cart-entry-thumbnail" href="/book/{{book_rel.book.id}}">
-                                <img src="img/product-1.png{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}">
+                                <img style="width:70px" src="{{ url_for('static', filename='files/images/%s'%(book_rel.book.images.all()[0].filename))}}">
+                            </a>
                             {% endif %}
                         </td>
                         <td data-title=" "><h6 class="h6"><a href="/book/{{book_rel.book.id}}">{{book_rel.book.title}}</a></h6></td>
                         <td data-title="Price: ">₹{{book_rel.book.price if book_rel.book.price else 0}}</td>
                         <td data-title="">
-                            <div class="button-close"></div>
+                            <div class="button-close remove-cart-button" bookId="{{book_rel.book.id}}" csrfToken="{{ csrf_token() }}"></div>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <div class="empty-space col-xs-b35"></div>
-            <div class="row">
-                {% if cart.book_count %}
-                <div class="col-sm-6 col-md-7 col-sm-text-right pull-right">
-                    <div class="buttons-wrapper">
-                        <a class="button size-2 style-2" href="products_list">
-                            <span class="button-wrapper">
-                                <span class="icon"><img src="img/icon-2.png" alt=""></span>
-                                <span class="text">update cart</span>
-                            </span>
-                        </a>
-                        <a class="button size-2 style-3" href="checkout">
-                            <span class="button-wrapper">
-                                <span class="icon"><img src="img/icon-4.png" alt=""></span>
-                                <span class="text">proceed to checkout</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
             <div class="empty-space col-xs-b35 col-md-b70"></div>
             <div class="row">
                 <div class="col-md-6 pull-right">
@@ -97,7 +78,7 @@
                                 cart subtotal
                             </div>
                             <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">₹{{cart.total_cost if cart.total_cost else 0}}</div>
+                                <div class="color">₹{{cart.total_price if cart.total_price else 0}}</div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +88,7 @@
                                 shipping and handling
                             </div>
                             <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">free shipping</div>
+                                <div class="color">{{'₹' + str(cart.shipping_charge) if cart.shipping_charge else 'Free Shipping'}}</div>
                             </div>
                         </div>
                     </div>
@@ -117,11 +98,26 @@
                                 order total
                             </div>
                             <div class="col-xs-6 col-xs-text-right">
-                                <div class="color">₹{{cart.total_cost if cart.total_cost else 0}}</div>
+                                <div class="color">₹{{cart.total_price+cart.shipping_charge if cart.total_price else 0}}</div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="empty-space col-xs-b35 col-md-b70"></div>
+            <div class="row">
+                {% if cart.book_count %}
+                <div class="col-sm-6 col-md-7 col-sm-text-right pull-right">
+                    <div class="buttons-wrapper">
+                        <a class="button size-2 style-3" href="checkout">
+                            <span class="button-wrapper">
+                                <span class="icon"><img src="../static/img/icons/icon-4.png" alt=""></span>
+                                <span class="text">proceed to checkout</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
             <div class="empty-space col-xs-b35 col-md-b70"></div>
             <div class="empty-space col-xs-b35 col-md-b70"></div>
