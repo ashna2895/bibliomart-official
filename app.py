@@ -183,13 +183,57 @@ def add_category():
         db.session.commit()
 
         flash('Category added successfully' , 'success')
-
+    add_category = Category.query.all()
     return render_template('add_category.html',page="category")
 
 @app.route('/admin/confirmed_orders')
 @login_required
 def admin_confirmed_orders():
     return render_template("admin-confirmed-orders.html", page="admin_confirmed_orders")
+
+@app.route('/sell')
+@login_required
+def sell():
+    if g.user.is_authenticated:
+        if request.method == 'GET':
+            categories = Category.query.all()
+            return render_template('sell.html', page="sell", categories=categories)
+        elif request.method == 'POST':
+            app.logger.info(repr(request.form))
+            title = request.form['title']
+            author = request.form['author']
+            price = request.form['price']
+            description = request.form['description']
+            category_id = request.form['category']
+            newbook = Book(title, author, description, price, category_id)
+            db.session.add(newbook)
+            db.session.commit()
+
+            book_id =newbook.id
+
+            if not os.path.isdir(app.config['IMAGE_FOLDER']):
+                try:
+                    os.makedirs(app.config['IMAGE_FOLDER'])
+                except:
+                    app.logger.info("Couldn't create directory")
+                    return "Couldn't create directory"
+
+            for idx,f in enumerate(request.files.getlist("file")):
+                app.logger.info(repr(f.content_type))
+                if f.__dict__['filename'] == '':
+                    continue
+                filename = "img%d_%s"%(book_id,f.__dict__['filename'])
+                if f.content_type[:5] == 'image':
+                    filetype = 'image'
+                    f.save(os.path.join(app.config['IMAGE_FOLDER'], filename))
+
+                newfile = Image(filename, filetype, book_id)
+                db.session.add(newfile)
+                db.session.commit()
+
+            flash('Book added successfully' , 'success')
+            return "ok"
+
 
 @app.route('/admin/verify',methods=['GET','POST'])
 @login_required
@@ -211,6 +255,7 @@ def admin_verify():
 
         categories = Category.query.all()
         unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
+        users = User.query.all()
         return render_template(
             'admin-verify.html', unverifiedusers = unverifiedusers,
             categories=categories,page="admin_user_verify"

@@ -13,6 +13,17 @@
                     <div class="entry"><a href="/logout"><b>logout</b></a></div>
                     {% endif %}
                     <div class="entry hidden-xs hidden-sm"><a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a></div>
+                    <div class="entry hidden-xs hidden-sm">
+                        {% if g.user.is_authenticated %}
+                            {% if g.user.is_admin %}
+                            <li class="{{'active' if 'admin' in page}}">
+                                <a href="{{url_for('admin_verify')}}">
+                                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                     <div class="entry hidden-xs hidden-sm cart">
                         <a href="/cart">
                             <b class="hidden-xs">Your bag</b>
@@ -58,11 +69,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 text-right">
-<<<<<<< HEAD
-                                    <a class="button size-2 style-3" href="/checkout">
-=======
-                                    <a class="button size-2 style-3" href="{{ url_for('logout')}}">
->>>>>>> parent of 5dc9e1f... Merge branch 'master' into Anitaky
+<!-- <<<<<<< HEAD -->
+                                    <!-- <a class="button size-2 style-3" href="/checkout"> -->
+<!-- ======= -->
+                                    <a class="button size-2 style-3" href="{{ url_for('cart')}}">
+<!-- >>>>>>> parent of 5dc9e1f... Merge branch 'master' into Anitaky -->
                                         <span class="button-wrapper">
                                             <span class="icon"><img src="../static/img/icons/icon-4.png" alt=""></span>
                                             <span class="text">proceed to checkout</span>
@@ -94,11 +105,14 @@
                         <nav>
                             <ul>
                                 <li class="active">
-                                    <a href="index.html">Home</a>
+                                    <a href="{{url_for('index')}}">Home</a>
                                 </li>
                                 <li>
-                                    <a href="products1.html">Books</a>
+                                <a href="{{url_for('sell')}}">Sell</a>
+                                </li>
+                                <li>
                                     <div class="menu-toggle"></div>
+                                    <a href="{{url_for('product_list_page')}}">Books</a>
                                     <ul>
                                         {% for i in categories %}
 <!-- <<<<<<< HEAD -->
@@ -111,7 +125,7 @@
                                         {% endfor %}
                                     </ul>
                                 </li>
-                                <li><a href="contactus.html">contact</a></li>
+                                <li><a href="{{url_for('contactus')}}">contact</a></li>
                             </ul>
                             <div class="navigation-title">
                                 Menu
@@ -126,7 +140,7 @@
                     <div class="header-bottom-icon visible-rd"><i class="fa fa-heart-o" aria-hidden="true"></i></div>
                     <div class="header-bottom-icon visible-rd">
                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                        <span class="cart-label">5</span>
+                        <span class="cart-label"></span>
                     </div>
                 </div>
             </div>

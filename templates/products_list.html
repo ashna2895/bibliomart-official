@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
 
     <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet"> -->
 
     <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/bootstrap.extension.css')}}" rel="stylesheet">
@@ -16,8 +16,8 @@
     <link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="img/favicon.ico" />
-  	<title>EX ZO</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='files/images/favicon.png')}}" rel="stylesheet">
+  	<title>Bibliomart</title>
 </head>
 <body class="fonts-1">
 
@@ -94,7 +94,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-6 col-md-3 col-xs-b25">
                     <div class="h4 col-xs-b25">Hot Sale</div>
                     <div class="product-shortcode style-4 rounded clearfix">
@@ -211,14 +211,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="empty-space col-xs-b15 col-sm-b45"></div>
         <div class="empty-space col-md-b70"></div>
 
         <!-- FOOTER -->
-        <div class="footer-form-block">
+        <!-- <div class="footer-form-block">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5 col-xs-b10 col-lg-b0">
@@ -686,7 +686,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
     <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
     <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>

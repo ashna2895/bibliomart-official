@@ -1,7 +1,5 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-
-
 DATABASE = 'site.db'
 DEBUG = True
 DATABASE_PATH = os.path.join(basedir, DATABASE)
