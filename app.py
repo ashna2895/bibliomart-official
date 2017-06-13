@@ -423,6 +423,18 @@ def checkout():
     categories = Category.query.all()
     return render_template("checkout.html",page="checkout", cart=cart, categories=categories)
 
+@app.route('/search/<search_text>')
+def search(search_text):
+    search_text = search_text.replace('+','%')
+    categories = Category.query.all()
+    books = Book.query.filter(Book.title.like('%'+search_text+'%')).all()
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
+    return render_template('search_results.html', search_text = search_text.replace('%','+'), books=books, categories=categories, cart=cart)
 
 @app.route('/test/<template>')
 def test(template):

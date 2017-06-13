@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
@@ -17,7 +17,7 @@
     <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
     <link rel="shortcut icon" href="../static/img/favicon.ico" />
-    <title>Bibliomart</title>
+  	<title>Bibliomart</title>
 </head>
 <body class="fonts-1">
 
@@ -27,106 +27,111 @@
     <div id="content-block">
         <!-- HEADER -->
         {% include 'header.html' %}
+
         <div class="container">
-            <div class="empty-space col-xs-b15 col-sm-b30"></div>
+            <div class="empty-space col-xs-b15 col-sm-b50 col-md-b100"></div>
             <div class="row">
                 <div class="col-md-9 col-md-push-3">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-b30 col-sm-b0">
-                            <div class="main-product-slider-wrapper swipers-couple-wrapper">
-                                <div class="swiper-container swiper-control-top">
-                                    <div class="swiper-button-prev hidden"></div>
-                                    <div class="swiper-button-next hidden"></div>
-                                    <div class="swiper-wrapper">
-                                        {% for i in book.images.all() %}
-                                        <div class="swiper-slide">
-                                            <div class="swiper-lazy-preloader"></div>
-                                            <div style="width:400px; height:400;" class="product-big-preview-entry swiper-lazy" data-background="{{ url_for('static', filename='files/images/%s'%(i.filename))}}"></div>
+                    <div class="align-inline spacing-1">
+                        <div class="h4">{{page}}</div>
+                    </div>
+                    <div class="empty-space col-xs-b25 col-sm-b60"></div>
+                    <div class="products-content">
+                        <div class="products-wrapper">
+                            <div class="row nopadding">
+                                {% for book in books %}
+                                <div class="col-sm-4">
+                                    <div class="product-shortcode style-1">
+                                        <div class="title">
+                                            <div class="h6 animate-to-green">
+                                                <a href="/book/{{book.id|lower}}">Search:{{search_text}}</a>
+                                            </div>
                                         </div>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="empty-space col-xs-b30 col-sm-b60"></div>
-                                    <div class="swiper-container swiper-control-bottom" data-breakpoints="1" data-xs-slides="3" data-sm-slides="3" data-md-slides="4" data-lt-slides="4" data-slides-per-view="5" data-center="1" data-click="1">
-                                        <div class="swiper-button-prev hidden"></div>
-                                        <div class="swiper-button-next hidden"></div>
-                                        <div class="swiper-wrapper">
-                                            {% for i in book.images.all() %}
-                                            <div class="swiper-slide">
-                                                <div class="product-small-preview-entry">
-                                                    <img style="width:70px; height:70px;" src="{{ url_for('static', filename='files/images/%s'%(i.filename))}}" alt="" />
+                                        <div class="preview">
+                                            {% if book.images.all() %}
+                                            <img style="height:350px;"src="{{ url_for('static', filename='files/images/%s'%(book.images.all()[0].filename))}}" alt="">
+                                            {% endif %}
+                                            <div class="preview-buttons valign-middle">
+                                                <div class="valign-middle-content">
+                                                    <a class="button size-2 style-2" href="/book/{{book.id|lower}}">
+                                                        <span class="button-wrapper">
+                                                            <span class="icon"><img src="../static/img/icons/icon-1.png" alt=""></span>
+                                                            <span class="text">Learn More</span>
+                                                        </span>
+                                                    </a>
+                                                    <button class="button size-2 style-3 add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
+                                                        <span class="button-wrapper">
+                                                            <span class="icon">
+                                                                <img src="../static/img/icons/icon-3.png" alt="">
+                                                            </span>
+                                                            <span class="text">add to cart</span>
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            {% endfor %}
+                                        </div>
+                                        <div class="price">
+                                            <div class="simple-article size-4"><span class="color">₹{{book.price}}</div>
+                                        </div>
+                                        <div class="description">
+                                            <div class="simple-article text size-2">
+                                                {{book.description}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="h3 col-xs-b25">{{book.title}}</div>
-                            <div class="row col-xs-b25">
-                                <div class="col-sm-6">
-                                    <div class="simple-article size-5 grey">PRICE: <span class="color">₹{{book.price}}</span></div>
-                                </div>
-                                <div class="col-sm-6 col-sm-text-right">
-                                    <div class="rate-wrapper align-inline">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <!-- <div class="simple-article size-2 align-inline">128 Reviews</div> -->
-                                </div>
-                            </div>
-                            <div class="simple-article size-3 col-xs-b30">
-                                {{book.description}}
-                            </div>
-                            <div class="row m5 col-xs-b40">
-                                <div class="col-sm-12 col-xs-b10 col-sm-b0">
-                                    <button class="button size-2 style-2 block add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
-                                        <span class="button-wrapper">
-                                            <span class="icon">
-                                                <img src="../static/img/icons/icon-3.png" alt="">
-                                            </span>
-                                            <span class="text">add to cart</span>
-                                        </span>
-                                    </button>
-                                </div>
-                                <!-- <div class="col-sm-6">
-                                    <a class="button size-2 style-1 block noshadow" href="#">
-                                        <span class="button-wrapper">
-                                            <span class="icon"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
-                                            <span class="text">add to favourites</span>
-                                        </span>
-                                    </a>
-                                </div> -->
-                            </div>
-
                         </div>
                     </div>
-                    <div class="empty-space col-md-b70"></div>
                 </div>
                 <div class="col-md-3 col-md-pull-9">
                     <div class="h4 col-xs-b10">popular categories</div>
                     <ul class="categories-menu transparent">
                         {% for i in categories %}
                         <li>
-                            <a href="/books/{{i.name|lower}}">{{i.name}}</a>
+                            <a href="/books/{{i.name}}">{{i.name}}</a>
                         </li>
                         {% endfor %}
                     </ul>
-                    <div class="empty-space col-xs-b25 col-sm-b60"></div>
                 </div>
             </div>
-            <div class="empty-space col-md-b70"></div>
             <div class="row">
-                <div class="col-sm-6 col-md-4 col-xs-b25">
+                <div class="col-sm-6 col-md-3 col-xs-b25">
+                    <div class="h4 col-xs-b25">Hot Sale</div>
+                    <div class="product-shortcode style-4 rounded clearfix">
+                        <a class="preview" href="#"><img src="../static/img/product-28.jpg" alt="" /></a>
+                        <div class="description">
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">WIRELESS</a></div>
+                            <h6 class="h6 col-xs-b10"><a href="#">wireless headphones</a></h6>
+                            <div class="simple-article dark">$98.00</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-b10"></div>
+                    <div class="product-shortcode style-4 rounded clearfix">
+                        <a class="preview" href="#"><img src="../static/img/product-29.jpg" alt="" /></a>
+                        <div class="description">
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
+                            <h6 class="h6 col-xs-b10"><a href="#">earphones case</a></h6>
+                            <div class="simple-article dark">$12.00</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-b10"></div>
+                    <div class="product-shortcode style-4 rounded clearfix">
+                        <a class="preview" href="#"><img src="../static/img/product-30.jpg" alt="" /></a>
+                        <div class="description">
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
+                            <h6 class="h6 col-xs-b10"><a href="#">headphones case</a></h6>
+                            <div class="simple-article"><span class="color">$24.00</span>&nbsp;&nbsp;&nbsp;<span class="line-through">$32.00</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-xs-b25">
                     <div class="h4 col-xs-b25">Top Rated</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-31.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">WIRELESS</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">WIRELESS</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">wireless headphones</a></h6>
                             <div class="simple-article dark">$98.00</div>
                         </div>
@@ -135,7 +140,7 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-32.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">earphones case</a></h6>
                             <div class="simple-article dark">$12.00</div>
                         </div>
@@ -144,18 +149,18 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-33.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">headphones case</a></h6>
                             <div class="simple-article dark">$4.00</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4 col-xs-b25">
+                <div class="col-sm-6 col-md-3 col-xs-b25">
                     <div class="h4 col-xs-b25">Popular</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-34.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">WIRELESS</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">WIRELESS</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">wireless headphones</a></h6>
                             <div class="simple-article dark">$98.00</div>
                         </div>
@@ -164,7 +169,7 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-35.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">earphones case</a></h6>
                             <div class="simple-article dark">$12.00</div>
                         </div>
@@ -173,18 +178,18 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-36.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">headphones case</a></h6>
                             <div class="simple-article dark">$4.00</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4 col-xs-b25">
+                <div class="col-sm-6 col-md-3 col-xs-b25">
                     <div class="h4 col-xs-b25">Best Choice</div>
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-37.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">WIRELESS</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">WIRELESS</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">wireless headphones</a></h6>
                             <div class="simple-article dark">$98.00</div>
                         </div>
@@ -193,7 +198,7 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-38.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">earphones case</a></h6>
                             <div class="simple-article dark">$12.00</div>
                         </div>
@@ -202,32 +207,21 @@
                     <div class="product-shortcode style-4 rounded clearfix">
                         <a class="preview" href="#"><img src="../static/img/product-39.jpg" alt="" /></a>
                         <div class="description">
-                            <div class="simple-article color size-1 col-xs-b5">CASES</div>
+                            <div class="simple-article color size-1 col-xs-b5"><a href="#">CASES</a></div>
                             <h6 class="h6 col-xs-b10"><a href="#">headphones case</a></h6>
                             <div class="simple-article dark">$4.00</div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <div class="empty-space col-xs-b15 col-sm-b45"></div>
+        <div class="empty-space col-md-b70"></div>
     </div>
 
-    <!-- feedbackModal -->
-    <div class="modal fade slide-up disable-scroll" id="feedbackModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content-wrapper">
-                <div class="modal-content">
-                  <div class="modal-body m-t-20">
-                    <h4 class="no-margin pb-10 text-center" id="feedbackModalHeading"></h4>
-                    <p id="feedbackModalMessage" class="text-center"></p>
-          					<!-- <div class="row">
-          						<button type="button" class="btn btn-primary btn-cons pull-right" data-dismiss="modal">Okay</button>
-          					</div> -->
-                  </div>
-			         </div>
-            </div>
-        </div>
+    <div class="popup-wrapper">
+        <div class="bg-layer"></div>
     </div>
 
     <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
@@ -252,21 +246,21 @@
     <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
 
     <script>
-    $(document).ready(function(){
-        var minVal = parseInt($('.min-price').text());
-        var maxVal = parseInt($('.max-price').text());
-        $( "#prices-range" ).slider({
-            range: true,
-            min: minVal,
-            max: maxVal,
-            step: 5,
-            values: [ minVal, maxVal ],
-            slide: function( event, ui ) {
-                $('.min-price').text(ui.values[ 0 ]);
-                $('.max-price').text(ui.values[ 1 ]);
-            }
+        $(document).ready(function(){
+            var minVal = parseInt($('.min-price').text());
+            var maxVal = parseInt($('.max-price').text());
+            $( "#prices-range" ).slider({
+                range: true,
+                min: minVal,
+                max: maxVal,
+                step: 5,
+                values: [ minVal, maxVal ],
+                slide: function( event, ui ) {
+                    $('.min-price').text(ui.values[ 0 ]);
+                    $('.max-price').text(ui.values[ 1 ]);
+                }
+            });
         });
-    });
     </script>
 
 
