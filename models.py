@@ -94,8 +94,6 @@ class OrderBook(db.Model):
         return '<OrderBook {}>'.format(self.order.user.name+" "+self.book.title)
 
 
-
-
 class Book(db.Model):
     """The database model for Books"""
     __tablename__ = "book"

@@ -225,14 +225,18 @@ def admin_verify():
             elif formtype == 'reject':
                 if user.verified == False:
                     db.session.delete(user)
+                db.session.delete(book)
+
             db.session.commit()
             return redirect(url_for('admin_verify'))
 
         unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
         verifiedusers = User.query.filter_by(verified=True).order_by(User.id.desc()).all()
+        books = Book.query.all()
+
         return render_template(
             'admin-verify.html', unverifiedusers = unverifiedusers,
-            page="admin_user_verify",verifiedusers=verifiedusers
+            page="admin_user_verify",verifiedusers=verifiedusers,books=books
         )
 
 @app.route('/user/edit',methods=['GET','POST'])
