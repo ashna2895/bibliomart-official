@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Bibliomart | Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="{{ url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/bootswatch.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+    <!-- favicon -->
+    <!--<link rel="icon" type="image/png" href="{{ url_for('static',filename='images/favicon.png') }}"/> -->
+</head>
+
+<body style="padding-top: 70px;">
+
+    {% include 'navbar.html' %}
+    <div id="modal-bg" class="modal-bg">
+
+        <div class="container">
+
+            <div class="row">
+              <div class="col-md-2" >
+                  <h3></h3>
+                  <ul class="nav nav-sidebar">
+                      <li class="active">
+                          <a href="{{url_for('admin_verify')}}">
+                              Verify Users
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{url_for('add_book')}}">
+                              Add Books
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{url_for('admin_view_books')}}">
+                              View Books
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{url_for('add_category')}}">
+                              Add Category
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{url_for('admin_approve_orders')}}">
+                              Approve Orders
+                          </a>
+                      </li>
+
+                      <li>
+                          <a href="{{url_for('admin_delete_books')}}">
+                              Verify Books
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-md-10" >
+                  <div class="panel">
+                      <div class="panel-body">
+                          <h3>Verify Books:</h3>
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for book in books %}
+                                  <tr>
+                                      <td>{{book.title}}</td>
+                                      <td>{{book.author}}</td>
+                                      <td>
+                                          <button type="submit" class="btn btn-warning btn-sm book-reject-button" bookid="{{book.id}}">Reject</button>
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+
+                  </div>
+              </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <form id="bookform" method="post" class="form-inline" tyle="display: inline-block">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="formtype" value="">
+        <input type="hidden" id="bookid" class="form-control" name="bookid" value="" >
+    </form>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('a img').on('click',function(){
+            var src = $(this).attr('src');
+            var img = '<a href = "' + src + '"><img class="img-responsive center-block" src="' + src + '"/></a>';
+            $('#myModal').modal();
+            $('#myModal').on('shown.bs.modal', function(){
+                $('#myModal .modal-body').html(img);
+
+                $('#modal-bg').addClass('modal-open');
+            });
+            $('#myModal').on('hidden.bs.modal', function(){
+                $('#myModal .modal-body').html('');
+
+                $('#modal-bg').removeClass('modal-open');
+            });
+        });
+
+        $('.book-reject-button').on('click',function(){
+            var bookid = $(this).attr('bookid');
+            $('[name=formtype]').val('reject');
+            $('[name=bookid]').val(bookid);
+            $('#bookform').submit();
+        });
+    })
+    </script>
+</body>
+
+</html>

@@ -225,19 +225,33 @@ def admin_verify():
             elif formtype == 'reject':
                 if user.verified == False:
                     db.session.delete(user)
-                db.session.delete(book)
-
             db.session.commit()
             return redirect(url_for('admin_verify'))
 
         unverifiedusers = User.query.filter_by(verified=False).order_by(User.id.desc()).all()
         verifiedusers = User.query.filter_by(verified=True).order_by(User.id.desc()).all()
-        books = Book.query.all()
-
         return render_template(
             'admin-verify.html', unverifiedusers = unverifiedusers,
-            page="admin_user_verify",verifiedusers=verifiedusers,books=books
+            page="admin_user_verify",verifiedusers=verifiedusers
         )
+
+@app.route('/admin/delete_books', methods=['GET','POST'])
+@login_required
+def admin_delete_books():
+    if g.user.is_admin:
+        books = Book.query.all()
+        if request.method == 'POST':
+            formtype = request.form['formtype']
+            book_id = request.form['bookid']
+            book = Book.query.get(book_id)
+            if formtype == 'reject':
+                db.session.delete(book)
+            db.session.commit()
+            return redirect(url_for('admin_delete_books'))
+        flash('Book deleted successfully' , 'success')
+        return render_template('admin-delete-books.html', page="admin-delete-books",books=books)
+
+
 
 @app.route('/user/edit',methods=['GET','POST'])
 @login_required
@@ -439,6 +453,10 @@ def search(search_text):
     else:
         cart=None
     return render_template('search_results.html', search_text = search_text.replace('%','+'), books=books, categories=categories, cart=cart)
+
+
+
+
 
 @app.route('/test/<template>')
 def test(template):

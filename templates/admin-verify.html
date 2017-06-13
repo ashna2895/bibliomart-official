@@ -54,6 +54,12 @@
                                 Approve Orders
                             </a>
                         </li>
+
+                        <li>
+                            <a href="{{url_for('admin_delete_books')}}">
+                                Verify Books
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-10" >
@@ -87,35 +93,6 @@
                             </table>
                         </div>
 
-
-                        <div class="panel-body">
-                            <h3>Verify Books:</h3>
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                        <th>Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for book in books %}
-                                    <tr>
-                                        <td>{{book.title}}</td>
-                                        <td>{{book.author}}</td>
-                                        <td>
-                                            <button type="submit" class="btn btn-warning btn-sm" book_id="{{book.id}}">Reject</button>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-
-
-
-
                     </div>
                 </div>
                 <div class="col-md-10" >
@@ -147,28 +124,7 @@
                         </div>
                     </div>
                 </div>
-            <!--    <div class="col-md-10" >
-                    <div class="panel">
-                        <div class="panel-body">
-                            <h3>All Users:</h3>
-                            <hr/>
-                            {% for user in users %}
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <h4>Name:{{user.name}}</h4>
-                                        <h4>Email:{{user.email}}</h4>
-                                        <h4>Mobile No:{{user.mobilenumber}}</h4>
-                                        <h4>Registerd on:{{user.registered_on}}</h4>
-                                        <h4>User role:{{user.user_role}}</h4>
-                                        <hr/>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>-->
+
             </div>
         </div>
     </div>
