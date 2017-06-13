@@ -1,5 +1,6 @@
 Flask==0.12
 Flask-Login==0.3.2
+Flask-SeaSurf==0.2.2
 Flask-Security==1.7.5
 Flask-SQLAlchemy==2.2
 Flask-WTF==0.14.2
