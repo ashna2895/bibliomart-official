@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Bibliomart | Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="{{ url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet"> -->
+    <link href="{{ url_for('static', filename='css/bootswatch.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+    <!-- favicon -->
+    <!--<link rel="icon" type="image/png" href="{{ url_for('static',filename='images/favicon.png') }}"/> -->
+</head>
+
+<body style="padding-top: 70px;">
+
+    {% include 'navbar.html' %}
+    <div id="modal-bg" class="modal-bg">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-2" >
+                    <h3></h3>
+                    <ul class="nav nav-sidebar">
+                        <li>
+                            <a href="{{url_for('admin_verify')}}">
+                                Verify Users
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('add_book')}}">
+                                Add Books
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('admin_view_books')}}">
+                                View Books
+                            </a>
+                        </li>
+                        <li>
+
+                            <a href="{{url_for('add_category')}}">
+                                Add Category
+                            </a>
+                        </li>
+                        <li>
+                        <li class="active">
+                            <a href="{{url_for('admin_approve_orders')}}">
+                                Approve Orders
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="col-md-10" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3>Approve Orders:</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Books</th>
+                                        <th>Purchased by</th>
+                                        <th>Shipping Address</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in unapproved_orders %}
+                                    <tr>
+                                        <td>
+                                            {{loop.index}}
+                                        </td>
+                                        <td>
+                                            {% for bk in order.order_books %}
+                                            {{loop.index|string +') '+bk.book.title}} <br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{order.user.name}}</td>
+                                        <td>
+                                            {{
+                                                order.shipping_city + ', '
+                                                + order.shipping_state + ', '
+                                                + order.shipping_pincode
+                                            }}
+                                        </td>
+                                        <td>{{order.total_price}}</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-sm order-approve-button" orderId="{{order.id}}">
+                                                Approve
+                                            </button>
+                                            <button type="submit" class="btn btn-warning btn-sm order-cancel-button" orderId="{{order.id}}">
+                                                Cancel
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10 pull-right" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3>Approved Orders:</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Books</th>
+                                        <th>Purchased by</th>
+                                        <th>Shipping Address</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in approved_orders %}
+                                    <tr>
+                                        <td>
+                                            {{loop.index}}
+                                        </td>
+                                        <td>
+                                            {% for bk in order.order_books %}
+                                            {{loop.index|string +') '+bk.book.title}} <br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{order.user.name}}</td>
+                                        <td>
+                                            {{
+                                                order.shipping_city + ', '
+                                                + order.shipping_state + ', '
+                                                + order.shipping_pincode
+                                            }}
+                                        </td>
+                                        <td>{{order.total_price}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10 pull-right" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h3>Cancelled Orders:</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No</th>
+                                        <th>Books</th>
+                                        <th>Purchased by</th>
+                                        <th>Shipping Address</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in cancelled_orders %}
+                                    <tr>
+                                        <td>
+                                            {{loop.index}}
+                                        </td>
+                                        <td>
+                                            {% for bk in order.order_books %}
+                                            {{loop.index|string +') '+bk.book.title}}<br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{order.user.name}}</td>
+                                        <td>
+                                            {{
+                                                order.shipping_city + ', '
+                                                + order.shipping_state + ', '
+                                                + order.shipping_pincode
+                                            }}
+                                        </td>
+                                        <td>{{order.total_price}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="updateOrderForm" method="post" class="form-inline" style="display: inline-block">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="formtype" value="">
+        <input type="hidden" id="orderId" class="form-control" name="orderId" value="" >
+    </form>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.order-approve-button').on('click',function(){
+            var orderId = $(this).attr('orderId');
+            $('[name=formtype]').val('approve');
+            $('[name=orderId]').val(orderId);
+            $('#updateOrderForm').submit();
+        });
+        $('.order-cancel-button').on('click',function(){
+            var orderId = $(this).attr('orderId');
+            $('[name=formtype]').val('cancel');
+            $('[name=orderId]').val(orderId);
+            $('#updateOrderForm').submit();
+        });
+    })
+    </script>
+</body>
+
+</html>
