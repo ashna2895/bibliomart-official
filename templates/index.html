@@ -27,6 +27,15 @@
     <div id="content-block">
         <!-- HEADER -->
         {% include 'header.html' %}
+		
+
+
+
+
+
+
+
+
 
         <div class="grey-background">
             <div class="container">
@@ -35,7 +44,7 @@
                 <div class="tabs-block">
                     <div class="row">
                         <div class="col-lg-4 col-xs-b15 col-lg-b0">
-                            <div class="h4">best sellers</div>
+                            <div class="h4">Bibliomart</div>
                         </div>
                         <div class="col-lg-8">
                             <div class="tabulation-menu-wrapper col-lg-text-right">
@@ -734,18 +743,56 @@
                         </div>
                     </div>
 
-                    <div class="tab-entry">
+					<div class="tab-entry">
                         <div class="row nopadding">
                             <div class="col-lg-6">
                                 <div class="row nopadding">
                                     <div class="col-sm-6">
                                         <div class="product-shortcode style-1">
                                             <div class="title">
-                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART </a></div>
+                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">S</a></div>
+                                                <div class="h6 animate-to-green"><a href="#">S</a></div>
+                                            </div>
+                                            <div class="preview">
+                                                <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
+                                                <div class="preview-buttons valign-middle">
+                                                    <div class="valign-middle-content">
+                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
+                                                                <span class="text">Learn More</span>
+                                                            </span>
+                                                        </a>
+                                                        <a class="button size-2 style-3" href="{{url_for('cart')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
+                                                                <span class="text">Add To Cart</span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="simple-article size-4 dark">Rs.30.00</div>
+                                            </div>
+                                            <div class="description">
+                                                <div class="simple-article text size-2">Mollis nec consequat</div>
+                                                <div class="icons">
+                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="product-shortcode style-1">
+                                            <div class="title">
+                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
                                                 <div class="h6 animate-to-green"><a href="#">Smart</a></div>
                                             </div>
                                             <div class="preview">
-                                                <img src="img/product-127.jpg" alt="">
+                                                <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
                                                 <div class="preview-buttons valign-middle">
                                                     <div class="valign-middle-content">
                                                         <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
@@ -767,7 +814,7 @@
                                                 <div class="simple-article size-4 dark">Rs.630.00</div>
                                             </div>
                                             <div class="description">
-                                                <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
+                                                <div class="simple-article text size-2">Mollis nec consequat</div>
                                                 <div class="icons">
                                                     <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
                                                     <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -775,226 +822,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="product-shortcode style-1">
-                                            <div class="title">
-                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
-                                                <div class="h6 animate-to-green"><a href="#">Smart</a></div>
-                                            </div>
-                                            <div class="preview">
-                                                <img src="img/product-128.jpg" alt="">
-                                                <div class="preview-buttons valign-middle">
-                                                    <div class="valign-middle-content">
-                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                                                                <span class="text">Learn More</span>
-                                                            </span>
-                                                        </a>
-                                                        <a class="button size-2 style-3" href="{{url_for('cart')}}">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-3.png" alt=""></span>
-                                                                <span class="text">Add To Cart</span>
-                                                            </span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <div class="simple-article size-4 dark">Rs.630.00</div>
-                                            </div>
-                                            <div class="description">
-                                                <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
-                                                <div class="icons">
-                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="row nopadding">
-                                    <div class="col-sm-6">
-                                        <div class="product-shortcode style-1">
-                                            <div class="title">
-                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
-                                                <div class="h6 animate-to-green"><a href="#">Smart</a></div>
-                                            </div>
-                                            <div class="preview">
-                                                <img src="img/product-125.jpg" alt="">
-                                                <div class="preview-buttons valign-middle">
-                                                    <div class="valign-middle-content">
-                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                                                                <span class="text">Learn More</span>
-                                                            </span>
-                                                        </a>
-                                                        <a class="button size-2 style-3" href="{{url_for('cart')}}">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-3.png" alt=""></span>
-                                                                <span class="text">Add To Cart</span>
-                                                            </span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <div class="simple-article size-4 dark">Rs.630.00</div>
-                                            </div>
-                                            <div class="description">
-                                                <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
-                                                <div class="icons">
-                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="product-shortcode style-1">
-                                            <div class="title">
-                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
-                                                <div class="h6 animate-to-green"><a href="#">Smart</a></div>
-                                            </div>
-                                            <div class="preview">
-                                                <img src="img/product-126.jpg" alt="">
-                                                <div class="preview-buttons valign-middle">
-                                                    <div class="valign-middle-content">
-                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                                                                <span class="text">Learn More</span>
-                                                            </span>
-                                                        </a>
-                                                        <a class="button size-2 style-3" href="#">
-                                                            <span class="button-wrapper">
-                                                                <span class="icon"><img src="img/icon-3.png" alt=""></span>
-                                                                <span class="text">Add To Cart</span>
-                                                            </span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <div class="simple-article size-4 dark">Rs.630.00</div>
-                                            </div>
-                                            <div class="description">
-                                                <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
-                                                <div class="icons">
-                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-entry">
-                        <div class="row nopadding">
-                            <div class="col-lg-6">
-                                <div class="slider-wrapper side-borders grid-products-2-items">
-                                    <div class="swiper-container">
-                                        <div class="swiper-button-prev hidden"></div>
-                                        <div class="swiper-button-next hidden"></div>
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="product-shortcode style-1 float">
-                                                    <div class="title">
-                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
-                                                        <div class="h6 animate-to-green"><a href="#">Smart</a></div>
-                                                    </div>
-                                                    <div class="preview">
-                                                        <img src="img/product-124.jpg" alt="">
-                                                        <div class="preview-buttons valign-middle">
-                                                            <div class="valign-middle-content">
-                                                                <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
-                                                                    <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                                                                        <span class="text">Learn More</span>
-                                                                    </span>
-                                                                </a>
-                                                                <a class="button size-2 style-3" href="#">
-                                                                    <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-3.png" alt=""></span>
-                                                                        <span class="text">Add To Cart</span>
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="simple-article size-4 dark">Rs.630.00</div>
-                                                        <div class="color-selection">
-                                                            <div class="entry active" style="color: #a7f050;"></div>
-                                                            <div class="entry" style="color: #50e3f0;"></div>
-                                                            <div class="entry" style="color: #eee;"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="description">
-                                                        <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
-                                                        <div class="icons">
-                                                            <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                                            <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                            <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="product-shortcode style-1 float">
-                                                    <div class="title">
-                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
-                                                        <div class="h6 animate-to-green"><a href="#">Smart</a></div>
-                                                    </div>
-                                                    <div class="preview">
-                                                        <img src="img/product-124.jpg" alt="">
-                                                        <div class="preview-buttons valign-middle">
-                                                            <div class="valign-middle-content">
-                                                                <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
-                                                                    <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-1.png" alt=""></span>
-                                                                        <span class="text">Learn More</span>
-                                                                    </span>
-                                                                </a>
-                                                                <a class="button size-2 style-3" href="#">
-                                                                    <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-3.png" alt=""></span>
-                                                                        <span class="text">Add To Cart</span>
-                                                                    </span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <div class="simple-article size-4 dark">Rs.630.00</div>
-                                                        <div class="color-selection">
-                                                            <div class="entry active" style="color: #a7f050;"></div>
-                                                            <div class="entry" style="color: #50e3f0;"></div>
-                                                            <div class="entry" style="color: #eee;"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="description">
-                                                        <div class="simple-article text size-2">Mollis nec consequat at In feugiat mole stie tortor a malesuada</div>
-                                                        <div class="icons">
-                                                            <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
-                                                            <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                                            <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-pagination md-relative-pagination"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1007,29 +834,29 @@
                                             <div class="swiper-slide">
                                                 <div class="product-shortcode style-1 float">
                                                     <div class="title">
-                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
+                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART</a></div>
                                                         <div class="h6 animate-to-green"><a href="#">Smart</a></div>
                                                     </div>
                                                     <div class="preview">
-                                                        <img src="img/product-129.jpg" alt="">
+                                                        <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
                                                         <div class="preview-buttons valign-middle">
                                                             <div class="valign-middle-content">
                                                                 <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
                                                                     <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-1.png" alt=""></span>
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
                                                                         <span class="text">Learn More</span>
                                                                     </span>
                                                                 </a>
-                                                                <a class="button size-2 style-3" href="#">
+                                                                <a class="button size-2 style-3" href="{{url_for('cart')}}">
                                                                     <span class="button-wrapper">
-                                                                        <span class="icon"><img src="img/icon-3.png" alt=""></span>
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
                                                                         <span class="text">Add To Cart</span>
                                                                     </span>
                                                                 </a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="price">
+                                                    <!-- <div class="price">
                                                         <div class="simple-article size-4 dark">Rs.630.00</div>
                                                         <div class="color-selection">
                                                             <div class="entry active" style="color: #a7f050;"></div>
@@ -1038,20 +865,20 @@
                                                         </div>
                                                     </div>
                                                     <div class="description">
-                                                        <div class="simple-article text size-2">Mollis nec consequat </div>
+                                                        <div class="simple-article text size-2">Mollis nec consequat</div>
                                                         <div class="icons">
                                                             <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
                                                             <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                             <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <div class="swiper-slide">
                                                 <div class="product-shortcode style-1 float">
                                                     <div class="title">
                                                         <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART </a></div>
-                                                        <div class="h6 animate-to-green"><a href="#">Smart</a></div>
+                                                        <div class="h6 animate-to-green"><a href="#">Smartbooks </a></div>
                                                     </div>
                                                     <div class="preview">
                                                         <img src="img/product-129.jpg" alt="">
@@ -1063,7 +890,7 @@
                                                                         <span class="text">Learn More</span>
                                                                     </span>
                                                                 </a>
-                                                                <a class="button size-2 style-3" href="#">
+                                                                <a class="button size-2 style-3" href="{{url_for('cart')}}">
                                                                     <span class="button-wrapper">
                                                                         <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
                                                                         <span class="text">Add To Cart</span>
@@ -1081,7 +908,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="description">
-                                                        <div class="simple-article text size-2"></div>
+                                                        <div class="simple-article text size-2">Mollis nec consequat</div>
                                                         <div class="icons">
                                                             <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
                                                             <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -1090,6 +917,188 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="swiper-pagination md-relative-pagination"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="tab-entry">
+                        <div class="row nopadding">
+                            <div class="col-lg-6">
+                                <div class="row nopadding">
+                                    <div class="col-sm-6">
+                                        <div class="product-shortcode style-1">
+                                            <div class="title">
+                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">S</a></div>
+                                                <div class="h6 animate-to-green"><a href="#">S</a></div>
+                                            </div>
+                                            <div class="preview">
+                                                <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
+                                                <div class="preview-buttons valign-middle">
+                                                    <div class="valign-middle-content">
+                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
+                                                                <span class="text">Learn More</span>
+                                                            </span>
+                                                        </a>
+                                                        <a class="button size-2 style-3" href="{{url_for('cart')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
+                                                                <span class="text">Add To Cart</span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="simple-article size-4 dark">Rs.30.00</div>
+                                            </div>
+                                            <div class="description">
+                                                <div class="simple-article text size-2">Mollis nec consequat</div>
+                                                <div class="icons">
+                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="product-shortcode style-1">
+                                            <div class="title">
+                                                <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART books</a></div>
+                                                <div class="h6 animate-to-green"><a href="#">Smart</a></div>
+                                            </div>
+                                            <div class="preview">
+                                                <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
+                                                <div class="preview-buttons valign-middle">
+                                                    <div class="valign-middle-content">
+                                                        <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
+                                                                <span class="text">Learn More</span>
+                                                            </span>
+                                                        </a>
+                                                        <a class="button size-2 style-3" href="{{url_for('cart')}}">
+                                                            <span class="button-wrapper">
+                                                                <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
+                                                                <span class="text">Add To Cart</span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="simple-article size-4 dark">Rs.630.00</div>
+                                            </div>
+                                            <div class="description">
+                                                <div class="simple-article text size-2">Mollis nec consequat</div>
+                                                <div class="icons">
+                                                    <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="slider-wrapper side-borders grid-products-2-items">
+                                    <div class="swiper-container">
+                                        <div class="swiper-button-prev hidden"></div>
+                                        <div class="swiper-button-next hidden"></div>
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <div class="product-shortcode style-1 float">
+                                                    <div class="title">
+                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART</a></div>
+                                                        <div class="h6 animate-to-green"><a href="#">Smart</a></div>
+                                                    </div>
+                                                    <!-- <div class="preview">
+                                                        <img src="{{ url_for('static', filename='files/images/bb.jpg')}}" alt="">
+                                                        <div class="preview-buttons valign-middle">
+                                                            <!-- <div class="valign-middle-content">
+                                                                <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
+                                                                    <span class="button-wrapper">
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
+                                                                        <span class="text">Learn More</span>
+                                                                    </span>
+                                                                </a>
+                                                                <a class="button size-2 style-3" href="{{url_for('cart')}}">
+                                                                    <span class="button-wrapper">
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
+                                                                        <span class="text">Add To Cart</span>
+                                                                    </span>
+                                                                </a>
+                                                            </div> -->
+                                                        </div>
+                                                    <!-- </div>
+                                                    <div class="price">
+                                                        <div class="simple-article size-4 dark">Rs.630.00</div>
+                                                        <div class="color-selection">
+                                                            <div class="entry active" style="color: #a7f050;"></div>
+                                                            <div class="entry" style="color: #50e3f0;"></div>
+                                                            <div class="entry" style="color: #eee;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="description">
+                                                        <div class="simple-article text size-2">Mollis nec consequat</div>
+                                                        <div class="icons">
+                                                            <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                            <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                            <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <!-- <div class="swiper-slide">
+                                                <div class="product-shortcode style-1 float">
+                                                    <div class="title">
+                                                        <div class="simple-article size-1 color col-xs-b5"><a href="#">SMART </a></div>
+                                                        <div class="h6 animate-to-green"><a href="#">Smartbooks </a></div>
+                                                    </div>
+                                                    <div class="preview">
+                                                        <img src="img/product-129.jpg" alt="">
+                                                        <div class="preview-buttons valign-middle">
+                                                            <div class="valign-middle-content">
+                                                                <a class="button size-2 style-2" href="{{url_for('product_list_page')}}">
+                                                                    <span class="button-wrapper">
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-1.png')}}" alt=""></span>
+                                                                        <span class="text">Learn More</span>
+                                                                    </span>
+                                                                </a>
+                                                                <a class="button size-2 style-3" href="{{url_for('cart')}}">
+                                                                    <span class="button-wrapper">
+                                                                        <span class="icon"><img src="{{ url_for('static', filename='files/img/icon-3.png')}}" alt=""></span>
+                                                                        <span class="text">Add To Cart</span>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price">
+                                                        <div class="simple-article size-4 dark">Rs.630.00</div>
+                                                        <div class="color-selection">
+                                                            <div class="entry active" style="color: #a7f050;"></div>
+                                                            <div class="entry" style="color: #50e3f0;"></div>
+                                                            <div class="entry" style="color: #eee;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="description">
+                                                        <div class="simple-article text size-2">Mollis nec consequat</div>
+                                                        <div class="icons">
+                                                            <a class="entry"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                                            <a class="entry"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                            <a class="entry"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                                         </div>
                                         <div class="swiper-pagination md-relative-pagination"></div>
                                     </div>

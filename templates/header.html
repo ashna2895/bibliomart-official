@@ -107,17 +107,15 @@
                                 <li class="active">
                                     <a href="{{url_for('index')}}">Home</a>
                                 </li>
-                                                                <li>
+                                <li>
                                     <div class="menu-toggle"></div>
                                     <a href="{{url_for('product_list_page')}}">Books</a>
                                     <ul>
                                         {% for i in categories %}
-<!-- <<<<<<< HEAD -->
                                         <li>
                                           <a href="/books/{{i.name|lower}}">{{i.name}}</a>
                                         </li>
-<!-- ======= -->
-                                        <li><a href="/books/{{i.name}}">{{i.name}}</a></li>
+<!-- ======= -->                        <li><a href="/books/{{i.name}}">{{i.name}}</a></li>
 <!-- >>>>>>> origin/cart -->
                                         {% endfor %}
                                     </ul>

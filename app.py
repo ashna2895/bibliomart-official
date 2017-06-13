@@ -37,6 +37,12 @@ def aboutus():
 
 @app.route('/contact')
 def contactus():
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
     return render_template("contactus.html",page="contact")
 
 @app.route('/admin/books')
@@ -46,6 +52,13 @@ def admin_view_books():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
+
     if request.method == 'GET':
         if g.user is not None and g.user.is_authenticated:
             return redirect(url_for('index'))
@@ -81,6 +94,12 @@ def logout():
 
 @app.route('/register',methods=['GET','POST'])
 def register():
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
 
@@ -123,6 +142,7 @@ def register():
             db.session.add(newuser)
             db.session.commit()
             return render_template('pendingverification.html')
+
 
 @app.route('/admin/add-book', methods = ['GET', 'POST'])
 @login_required
