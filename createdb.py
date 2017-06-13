@@ -15,18 +15,15 @@ with app.app_context():
     u1.verified = True
     db.session.add(u1)
 
-
     u2 = User("anita","anita@bibliomart.com","password","8547087845","admin")
     u2.is_admin = True
     u2.verified = True
     db.session.add(u2)
 
-
     u3 = User("tissa","tissa@bibliomart.com","password","0123456789","admin")
     u3.is_admin = True
     u3.verified = True
     db.session.add(u3)
-
 
     c = Category("Fiction")
     db.session.add(c)
@@ -39,9 +36,7 @@ with app.app_context():
     c4 = Category("Educational")
     db.session.add(c4)
 
-
     # b1=
-
 
     db.session.commit()
 
