@@ -43,7 +43,7 @@ def contactus():
             cart = Cart(g.user.id)
     else:
         cart=None
-    return render_template("contactus.html",page="contact")
+    return render_template("contactus.html",page="contact", cart=cart)
 
 @app.route('/admin/books')
 def admin_view_books():
@@ -62,7 +62,7 @@ def login():
     if request.method == 'GET':
         if g.user is not None and g.user.is_authenticated:
             return redirect(url_for('index'))
-        return render_template('login.html',page="login")
+        return render_template('login.html',page="login", cart=cart)
 
     elif request.method == 'POST':
         email = request.form['email']
@@ -77,10 +77,10 @@ def login():
                 login_user(user)
                 return redirect(url_for('index'))
             flash('Username or Password is invalid' , 'warning')
-            return render_template("login.html",page="login")
+            return render_template("login.html",page="login",cart=cart)
         else:
             flash('Username or Password is invalid' , 'warning')
-            return render_template("login.html",page="login")
+            return render_template("login.html",page="login", cart=cart)
 
 @app.route('/logout')
 @login_required
@@ -105,7 +105,7 @@ def register():
 
     error = False
     if request.method == 'GET':
-        return render_template('register.html',page="register")
+        return render_template('register.html',page="register", cart=cart)
 
     elif request.method == 'POST':
         app.logger.info(repr(request.form))
