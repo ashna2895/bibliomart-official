@@ -251,6 +251,21 @@ def admin_delete_books():
         flash('Book deleted successfully' , 'success')
         return render_template('admin-delete-books.html', page="admin-delete-books",books=books)
 
+@app.route('/admin/delete_categories', methods=['GET','POST'])
+@login_required
+def admin_delete_categories():
+    if g.user.is_admin:
+        categories = Category.query.all()
+        if request.method == 'POST':
+            formtype = request.form['formtype']
+            category_id = request.form['categoryid']
+            category = Category.query.get(category_id)
+            if formtype == 'reject':
+                db.session.delete(category)
+            db.session.commit()
+            return redirect(url_for('admin_delete_categories'))
+        flash('Category deleted successfully' , 'success')
+        return render_template('admin-delete-categories.html', page="admin-delete-categories",categories=categories)
 
 
 @app.route('/user/edit',methods=['GET','POST'])

@@ -29,7 +29,7 @@
               <div class="col-md-2" >
                   <h3></h3>
                   <ul class="nav nav-sidebar">
-                      <li >
+                      <li>
                           <a href="{{url_for('admin_verify')}}">
                               Verify Users
                           </a>
@@ -45,16 +45,11 @@
                           </a>
                       </li>
                       <li>
-                          <a href="{{url_for('admin_delete_books')}}">
-                              Verify Books
-                          </a>
-                      </li>
-                      <li>
                           <a href="{{url_for('add_category')}}">
                               Add Category
                           </a>
                       </li>
-                      <li>
+                      <li  class="active">
                           <a href="{{url_for('admin_delete_categories')}}">
                               Delete Category
                           </a>
@@ -65,7 +60,7 @@
                           </a>
                       </li>
 
-                      <li class="active">
+                      <li>
                           <a href="{{url_for('admin_delete_books')}}">
                               Verify Books
                           </a>
@@ -75,22 +70,21 @@
               <div class="col-md-10" >
                   <div class="panel">
                       <div class="panel-body">
-                          <h3>Verify Books:</h3>
+                          <h3>Categories:</h3>
                           <table class="table table-hover">
                               <thead>
                                   <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody>
-                                  {% for book in books %}
+                                  {% for category in categories %}
                                   <tr>
-                                      <td>{{book.title}}</td>
-                                      <td>{{book.author}}</td>
+                                      <td>{{category.name}}</td>
+
                                       <td>
-                                          <button type="submit" class="btn btn-warning btn-sm book-reject-button" bookid="{{book.id}}">Reject</button>
+                                          <button type="submit" class="btn btn-warning btn-sm category-reject-button" categoryid="{{category.id}}">Reject</button>
                                       </td>
                                   </tr>
                                   {% endfor %}
@@ -115,10 +109,10 @@
 
 
 
-    <form id="bookform" method="post" class="form-inline" tyle="display: inline-block">
+    <form id="categoryform" method="post" class="form-inline" tyle="display: inline-block">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <input type="hidden" name="formtype" value="">
-        <input type="hidden" id="bookid" class="form-control" name="bookid" value="" >
+        <input type="hidden" id="categoryid" class="form-control" name="categoryid" value="" >
     </form>
 
 
@@ -147,11 +141,11 @@
             });
         });
 
-        $('.book-reject-button').on('click',function(){
-            var bookid = $(this).attr('bookid');
+        $('.category-reject-button').on('click',function(){
+            var categoryid = $(this).attr('categoryid');
             $('[name=formtype]').val('reject');
-            $('[name=bookid]').val(bookid);
-            $('#bookform').submit();
+            $('[name=categoryid]').val(categoryid);
+            $('#categoryform').submit();
         });
     })
     </script>

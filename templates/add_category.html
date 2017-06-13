@@ -48,7 +48,11 @@
                             View Books
                         </a>
                     </li>
-
+                    <li>
+                        <a href="{{url_for('admin_delete_books')}}">
+                            Verify Books
+                        </a>
+                    </li>
                 <li class="active">
                     <a href="{{url_for('add_category')}}">
                             Add Category
@@ -91,11 +95,6 @@
                         <div class="panel-body">
                             <h3>All Category:</h3>
                             <table class="table table-hover">
-                                <!-- <thead>
-                                    <tr>
-                                        <th>Category Name</th>
-                                    </tr>
-                                </thead> -->
                                 <tbody>
                                     {% for category in categories %}
                                     <tr>
