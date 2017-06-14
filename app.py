@@ -362,7 +362,7 @@ def edituser():
 @app.route('/')
 def index():
     categories = Category.query.all()
-    books = Book.query.order_by(-Book.date_added).limit(6).all()
+    books = Book.query.order_by(Book.date_added).limit(6).all()
     cart = get_cart()
     return render_template("index.html",page="home",books=books, cart=cart, categories=categories)
 
