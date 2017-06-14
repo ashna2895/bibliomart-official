@@ -9,5 +9,5 @@
 	```
 	python app.py  
 	```  
- This starts the development web server listening at port 5050  
-3. Visit **localhost:5050** or **127.0.0.1:5050** in the browser to use the app.
+ This starts the development web server listening at port 5000  
+3. Visit **localhost:5000** or **127.0.0.1:5000** in the browser to use the app.

@@ -1,85 +1,149 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
 
-    <title> Bibliomart | Contact Us</title>
+    <!-- fonts -->
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ url_for('static', filename='css/bootswatch.css')}}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Questrial|Raleway:700,900" rel="stylesheet">
+
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/bootstrap.extension.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/swiper.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/sumoselect.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
 
-    <!-- favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static',filename='images/favicon.png') }}"/>
+
+
+
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+		<title>Bibliomart | Contact</title>
 </head>
-<style type="text/css">
-.navbar-nav > li{
-    font-size: 14px;
-}
-</style>
-<body style="padding-top: 70px;">
+<body>
 
-    <!-- Fixed navbar -->
-    {% include 'navbar.html' %}
-    <div class="container">
+    <!-- LOADER -->
+    <div id="loader-wrapper"></div>
 
-        {% include 'flash.html'%}
+    <div id="content-block">
+        <!-- HEADER -->
+				{% include 'header.html' %}
 
-        <div class="btn-group btn-group-justified">
 
-            <a href="{{url_for('index')}}" class="btn btn-default">Home</a>
-            <a href="{{url_for('aboutus')}}" class="btn btn-default">About Us</a>
-            <a href="{{url_for('contactus')}}" class="btn btn-primary">Contact US</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="cell-view simple-banner-height text-center">
 
-        </div>
-        <div class="col-md-8 col-md-offset-2" style = "margin-top:5em;">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>CONTACT US</h3>
-                    <p><h5>Drop a mail to any/all of us.</h5></p>
-                    <div class="list-group">
-                        <p><h5> Developers:</h5></p>
-                        <a class="list-group-item">
-                            <p><strong> Ashna Abdul Lathif</strong>
-                                <span class="pull-right">
-                                    ashna@bibliomart.com
-                                </span>
-                            </p>
-                        </a>
-                        <a class="list-group-item">
-                            <p><strong> Tissa Ann Mary</strong>
-                                <span class="pull-right">
-                                    tissa@bibliomart.com
-                                </span>
-                            </p>
-                        </a>
-                        <a class="list-group-item">
-                            <p><strong> Anita Yesudas</strong>
-                                <span class="pull-right">
-                                  anita@bibliomart.com
-                                </span>
-                            </p>
-                        </a>
+														<h3 class="h3">Drop a mail to any/all of us   </h3>
+
+
+
+														  <table class="table table-hover">
+	                                <tbody>
+	                                    <tr>
+	                                        <td>Ashna Abdul Lathif </td>
+	                                        <td><a href="mailto:ashna@bibliomart.com">ashna@bibliomart.com</a></td>
+																			</tr>
+																			<tr>
+	                                        <td>Anita Yesudas </td>
+	                                        <td><a href="mailto:anita@bibliomart.com">anita@bibliomart.com</a></td>
+																			</tr>
+																			<tr>
+		                                        <td>Tissa Ann Mary </td>
+		                                        <td><a href="mailto:tissa@bibliomart.com">tissa@bibliomart.com</a></td>
+																			</tr>
+
+	                                </tbody>
+	                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main component for a primary marketing message or call to action -->
 
-    </div> <!-- /container -->
+        <div class="container">
+            <div class="text-center">
+                <div class="simple-article size-3 grey uppercase col-xs-b5">our contacts</div>
+                <div class="h4">we are ready for your questions</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+            </div>
+        </div>
+
+        <div class="empty-space col-sm-b15 col-md-b50"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+
+                        <div class="title h6">address</div>
+                        <div class="description simple-article size-2">Christ Knowledge City,Ernakulam</div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="icon-description-shortcode style-1">
+												<span class="pull-centre">
+                        <div class="title h6">phone</div>
+                        <div class="description simple-article size-2" style="line-height: 26px;">
+                            <a href="tel:+9876543210">+9876543210</a>
+                            <br/>
+                            <a href="tel:+9876543211">+9876543211</a>
+                        </div>
+                    </div>
+									</span>
+
+                </div>
+                <div class="col-sm-3">
+                    <div class="icon-description-shortcode style-1">
+											<span class="pull-right">
+                        <div class="title h6">email</div>
+                        <div class="description simple-article size-2"><a href="mailto:info@bibliomart.com">info@bibliomart.com</a></div>
+											</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-space col-xs-b25 col-sm-b50"></div>
+
+
+
+
+
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/jquery-2.2.4.min.js')}}"></script>
+	  <script src="{{ url_for('static', filename='js/swiper.jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/global.js')}}"></script>
+
+
+
+    <!-- styled select -->
+		<script src="{{ url_for('static', filename='js/jquery.sumoselect.min.js')}}"></script>
+
+
+    <!-- counter -->
+		<script src="{{ url_for('static', filename='js/jquery.classycountdown.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.knob.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.throttle.js')}}"></script>
+
+
+    <!-- MAP -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/map.js"></script>
+
+    <!-- CONTACT -->
+    <script src="js/contact.form.js"></script>
+
+
+
 </body>
 </html>

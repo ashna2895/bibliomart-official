@@ -3,7 +3,7 @@ from flask import (Flask, request, render_template, url_for, redirect, flash, se
 from flask_login import LoginManager
 from flask_login import login_user , logout_user , current_user , login_required
 from werkzeug import generate_password_hash, check_password_hash
-from flask_seasurf import SeaSurf #for csrf protection
+from flask_seasurf import SeaSurf
 import os
 import datetime
 import requests as req
@@ -16,7 +16,7 @@ from models import db
 
 db.init_app(app)
 csrf = SeaSurf(app)
-#cross site request forgery
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -37,7 +37,14 @@ def aboutus():
 
 @app.route('/contact')
 def contactus():
-    return render_template("contactus.html",page="contact")
+    categories = Category.query.all()
+    if current_user.is_authenticated:
+        cart = g.user.cart.first()
+        if not cart:
+            cart = Cart(g.user.id)
+    else:
+        cart=None
+    return render_template("contactus.html",page="contact", cart=cart, categories=categories)
 
 @app.route('/admin/books')
 def admin_view_books():
@@ -110,7 +117,7 @@ def register():
             error = True
             flash("Mobile number is invalid",'warning')
 
-        #app.logger.info("Error = ", str(error))
+
         if error:
             return render_template(
                 'register.html',page="register",retry=True,
@@ -248,7 +255,7 @@ def admin_delete_books():
                 db.session.delete(book)
             db.session.commit()
             return redirect(url_for('admin_delete_books'))
-        flash('Book deleted successfully' , 'success')
+            flash('Book deleted successfully' , 'success')
         return render_template('admin-delete-books.html', page="admin-delete-books",books=books)
 
 @app.route('/admin/delete_categories', methods=['GET','POST'])
@@ -264,7 +271,7 @@ def admin_delete_categories():
                 db.session.delete(category)
             db.session.commit()
             return redirect(url_for('admin_delete_categories'))
-        flash('Category deleted successfully' , 'success')
+            flash('Category deleted successfully' , 'success')
         return render_template('admin-delete-categories.html', page="admin-delete-categories",categories=categories)
 
 
@@ -333,6 +340,7 @@ def edituser():
 
 @app.route('/')
 def index():
+    categories = Category.query.all()
     books = Book.query.all()
     if current_user.is_authenticated:
         cart = g.user.cart.first()
@@ -340,7 +348,7 @@ def index():
             cart = Cart(g.user.id)
     else:
         cart=None
-    return render_template("index.html",page="home",books=books, cart=cart)
+    return render_template("index.html",page="home",books=books, cart=cart, categories=categories)
 
 @app.route('/404')
 def error_404():

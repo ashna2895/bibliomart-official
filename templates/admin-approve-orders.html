@@ -24,6 +24,7 @@
     <div id="modal-bg" class="modal-bg">
 
         <div class="container">
+          {%  include 'flash.html' %}
 
             <div class="row">
                 <div class="col-md-2" >
@@ -45,8 +46,12 @@
                             </a>
                         </li>
                         <li>
-
-                            <a href="{{url_for('add_category')}}">
+                            <a href="{{url_for('admin_delete_books')}}">
+                                Verify Books
+                            </a>
+                        </li>
+                        <li>
+                          <a href="{{url_for('add_category')}}">
                                 Add Category
                             </a>
                         </li>

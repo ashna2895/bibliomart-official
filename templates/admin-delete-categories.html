@@ -21,9 +21,11 @@
 <body style="padding-top: 70px;">
 
     {% include 'navbar.html' %}
+    {%  include 'flash.html' %}
     <div id="modal-bg" class="modal-bg">
 
         <div class="container">
+
 
             <div class="row">
               <div class="col-md-2" >
@@ -45,6 +47,11 @@
                           </a>
                       </li>
                       <li>
+                          <a href="{{url_for('admin_delete_books')}}">
+                              Verify Books
+                          </a>
+                      </li>
+                      <li>
                           <a href="{{url_for('add_category')}}">
                               Add Category
                           </a>
@@ -60,11 +67,7 @@
                           </a>
                       </li>
 
-                      <li>
-                          <a href="{{url_for('admin_delete_books')}}">
-                              Verify Books
-                          </a>
-                      </li>
+
                   </ul>
               </div>
               <div class="col-md-10" >

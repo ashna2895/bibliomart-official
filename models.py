@@ -105,13 +105,11 @@ class Book(db.Model):
     description = db.Column(db.Text, nullable=False)
     date_added = db.Column(db.DateTime)
     category_id = db.Column(db.String, db.ForeignKey('category.id'))
-
-
     category = db.relationship('Category',backref=db.backref('book', lazy='dynamic'))
     images = db.relationship('Image', backref='book', lazy='dynamic')
     carts = db.relationship("Cart", secondary="cart_book", viewonly=True)
     orders = db.relationship("Order", secondary="order_book", viewonly=True)
-
+    # is_sold = db.Column(db.Boolean, default = False)
 
     def __init__(self, title, author, description, price, category_id):
         self.id = uuid.uuid4().hex
@@ -212,18 +210,3 @@ class Order(db.Model):
         self.shipping_pincode = shipping_pincode
         self.shipping_landmark = shipping_landmark
         self.shipping_phone = shipping_phone
-
-
-
-# class Comments(db.Model):
-#     """docstring for comments ."""
-#     __tablename__="comments"
-#     id = db.Column(db.String, primary_key=True)
-#     name = db.Column(db.String,db.ForeignKey('user.id'))
-#     email = db.Column(db.String,db.ForeignKey('user.email'))
-#     comment = db.Column(db.String)
-#     pub_date = db.Column(db.DateTime)
-#     def __init__(self, arg):
-#         #super(, self).__init__()
-#         self.arg = arg
-        #done!

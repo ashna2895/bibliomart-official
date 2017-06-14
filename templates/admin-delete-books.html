@@ -24,6 +24,7 @@
     <div id="modal-bg" class="modal-bg">
 
         <div class="container">
+          {%  include 'flash.html' %}
 
             <div class="row">
               <div class="col-md-2" >
@@ -44,7 +45,7 @@
                               View Books
                           </a>
                       </li>
-                      <li>
+                      <li class="active">
                           <a href="{{url_for('admin_delete_books')}}">
                               Verify Books
                           </a>
@@ -65,11 +66,7 @@
                           </a>
                       </li>
 
-                      <li class="active">
-                          <a href="{{url_for('admin_delete_books')}}">
-                              Verify Books
-                          </a>
-                      </li>
+
                   </ul>
               </div>
               <div class="col-md-10" >
@@ -89,6 +86,7 @@
                                   <tr>
                                       <td>{{book.title}}</td>
                                       <td>{{book.author}}</td>
+                                      <td>{{book.category.name}}</td>
                                       <td>
                                           <button type="submit" class="btn btn-warning btn-sm book-reject-button" bookid="{{book.id}}">Reject</button>
                                       </td>
