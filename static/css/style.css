@@ -1362,3 +1362,14 @@ body.loaded .big-slider-product .description, body.loaded .big-slider-product .p
 @media (max-width: 767px) {
 
 }
+
+.header-logo-text{
+    color: black;
+    font-size: 40px;
+    font-weight: 900;
+    padding-top: 30px;
+}
+
+.no-padding{
+    padding: 0px !important;
+}

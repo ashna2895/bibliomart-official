@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-from models import User, Category, Book, Image, Cart, CartBook, Order
+from models import User, Category, Book, Image, Cart, CartBook, Order, OrderBook
 from models import db
 
 db.init_app(app)
@@ -21,7 +21,6 @@ csrf = SeaSurf(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-
 
 @login_manager.user_loader
 def load_user(id):
@@ -38,12 +37,7 @@ def aboutus():
 @app.route('/contact')
 def contactus():
     categories = Category.query.all()
-    if current_user.is_authenticated:
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
-    else:
-        cart=None
+    cart = get_cart()
     return render_template("contactus.html",page="contact", cart=cart, categories=categories)
 
 @app.route('/admin/books')
@@ -203,6 +197,33 @@ def admin_approve_orders():
             order = Order.query.get(order_id)
             if formtype == 'approve':
                 order.is_approved = True
+                for book_rel in order.order_books:
+                    book_id = book_rel.book.id
+                    order_id = order.id
+                    cart_books = CartBook.query.filter_by(book_id=book_id)
+                    for cart_book in cart_books:
+                        cart = Cart.query.get(cart_book.cart_id)
+                        cart.book_count -= 1
+                        cart.total_price -= book_rel.book.price
+                        if cart.book_count == 0:
+                            db.session.delete(cart)
+                        db.session.delete(cart_book)
+                        db.session.commit()
+                    order_books = OrderBook.query.filter(
+                        OrderBook.book_id==book_id,
+                        OrderBook.order_id!=order_id
+                    )
+                    for order_book in order_books:
+                        ordr = Order.query.get(order_book.order_id)
+                        ordr.book_count -= 1
+                        ordr.total_price -= book_rel.book.price
+                        if ordr.book_count == 0:
+                            ordr.is_cancelled = True
+                        db.session.delete(order_book)
+                        db.session.commit()
+                    book = Book.query.get(book_rel.book.id)
+                    book.is_sold = True
+                    db.session.commit()
             elif formtype == 'cancel':
                 order.is_cancelled = True
             db.session.add(order)
@@ -341,48 +362,28 @@ def edituser():
 @app.route('/')
 def index():
     categories = Category.query.all()
-    books = Book.query.all()
-    if current_user.is_authenticated:
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
-    else:
-        cart=None
+    books = Book.query.order_by(-Book.date_added).limit(6).all()
+    cart = get_cart()
     return render_template("index.html",page="home",books=books, cart=cart, categories=categories)
 
 @app.route('/404')
 def error_404():
     categories = Category.query.all()
-    if current_user.is_authenticated:
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
-    else:
-        cart=None
+    cart = get_cart()
     return render_template("404.html",page="404",categories=categories)
 
 @app.route('/book/<book_id>', methods = ['GET', 'POST'])
 def book_page(book_id):
     book = Book.query.get(book_id)
     categories = Category.query.all()
-    if current_user.is_authenticated:
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
-    else:
-        cart=None
+    cart = get_cart()
     return render_template('product.html',page="individual book pages", categories=categories, book=book, cart=cart)
 
 @app.route('/books', methods = ['GET', 'POST'])
 @app.route('/books/<category>', methods = ['GET', 'POST'])
 def product_list_page(category=''):
     categories = Category.query.all()
-    if current_user.is_authenticated:
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
-    else:
-        cart=None
+    cart = get_cart()
     if category:
         selected_category = Category.query.filter_by(name=category)
         if not selected_category:
@@ -399,9 +400,7 @@ def cart():
     if request.method == 'GET':
         if not current_user.is_authenticated:
             return redirect(url_for('login'))
-        cart = g.user.cart.first()
-        if not cart:
-            cart = Cart(g.user.id)
+        cart = get_cart()
         categories = Category.query.all()
         return render_template('cart.html',page="cart", categories=categories, cart=cart)
     if request.method == 'POST':
@@ -410,9 +409,8 @@ def cart():
         if request.form['type'] == 'AddBook':
             book_id = request.form['book_id']
             book = Book.query.get(book_id)
-            cart = g.user.cart.first()
-            if not cart:
-                cart = Cart(g.user.id)
+            cart = get_cart()
+            if not g.user.cart.first():
                 db.session.add(cart)
                 db.session.commit()
             cart.add_book(book)
@@ -421,7 +419,7 @@ def cart():
         if request.form['type'] == 'RemoveBook':
             book_id = request.form['book_id']
             book = Book.query.get(book_id)
-            cart = g.user.cart.first()
+            cart = get_cart()
             cart.remove_book(book)
             db.session.commit()
             resp = make_response("Book removed from cart")
@@ -431,9 +429,7 @@ def cart():
 def orders():
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    cart = g.user.cart.first()
-    if not cart:
-        cart = Cart(g.user.id)
+    cart = get_cart()
     orders = g.user.order.all()
     categories = Category.query.all()
     return render_template("orders.html",page="orders", orders=orders, cart=cart, categories=categories)
@@ -442,8 +438,8 @@ def orders():
 def checkout():
     if request.method == 'POST':
         form_data = request.form
-        cart = g.user.cart.first()
-        if not cart or cart.book_count<1:
+        cart = get_cart()
+        if not g.user.cart.first() or cart.book_count<1:
             resp = make_response("Cart Empty")
         order = Order(g.user.id, form_data['name'], form_data['address'],
             form_data['state'], form_data['city'], form_data['pincode'],
@@ -458,9 +454,7 @@ def checkout():
 
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    cart = g.user.cart.first()
-    if not cart:
-        return redirect(url_for('cart'))
+    cart = get_cart()
     categories = Category.query.all()
     return render_template("checkout.html",page="checkout", cart=cart, categories=categories)
 
@@ -475,15 +469,26 @@ def search(search_text):
         Book.title.like('%'+search_text+'%') |
         Book.author.like('%'+search_text+'%')
     ).all()
+    cart = get_cart()
+    return render_template('search_results.html', search_text = search_text.replace('%','+'), books=books, categories=categories, cart=cart)
+
+def get_cart():
     if current_user.is_authenticated:
         cart = g.user.cart.first()
         if not cart:
             cart = Cart(g.user.id)
+        else:
+            for book_rel in cart.cart_books:
+                if book_rel.book.is_sold:
+                    cart_book = CartBook.query.filter_by(
+                        book_id=book_rel.book.id, cart_id = cart.id
+                    )
+                    db.session.delete(cart_book)
+                    db.session.commit()
+                    cart = g.user.cart.first()
     else:
         cart=None
-    return render_template('search_results.html', search_text = search_text.replace('%','+'), books=books, categories=categories, cart=cart)
-
-
+    return cart
 
 
 

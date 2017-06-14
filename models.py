@@ -109,7 +109,7 @@ class Book(db.Model):
     images = db.relationship('Image', backref='book', lazy='dynamic')
     carts = db.relationship("Cart", secondary="cart_book", viewonly=True)
     orders = db.relationship("Order", secondary="order_book", viewonly=True)
-    # is_sold = db.Column(db.Boolean, default = False)
+    is_sold = db.Column(db.Boolean, default = False)
 
     def __init__(self, title, author, description, price, category_id):
         self.id = uuid.uuid4().hex

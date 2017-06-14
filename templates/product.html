@@ -68,23 +68,23 @@
                                 <div class="col-sm-6">
                                     <div class="simple-article size-5 grey">PRICE: <span class="color">₹{{book.price}}</span></div>
                                 </div>
-                                <div class="col-sm-6 col-sm-text-right">
-                                    <div class="rate-wrapper align-inline">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                    <!-- <div class="simple-article size-2 align-inline">128 Reviews</div> -->
-                                </div>
                             </div>
                             <div class="simple-article size-3 col-xs-b30">
                                 {{book.description}}
                             </div>
                             <div class="row m5 col-xs-b40">
                                 <div class="col-sm-12 col-xs-b10 col-sm-b0">
-                                    <button class="button size-2 style-2 block add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
+                                    {% if book.is_sold %}
+                                    <button class="button size-2 style-3" disabled>
+                                        <span class="button-wrapper">
+                                            <span class="icon">
+                                                <img src="../static/img/icons/icon-5.png" alt="">
+                                            </span>
+                                            <span class="text">Sold Out</span>
+                                        </span>
+                                    </button>
+                                    {% else %}
+                                    <button class="button size-2 style-3 add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
                                         <span class="button-wrapper">
                                             <span class="icon">
                                                 <img src="../static/img/icons/icon-3.png" alt="">
@@ -92,6 +92,7 @@
                                             <span class="text">add to cart</span>
                                         </span>
                                     </button>
+                                    {% endif %}
                                 </div>
 
                             </div>

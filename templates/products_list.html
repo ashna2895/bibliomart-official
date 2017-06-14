@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
@@ -17,7 +17,7 @@
     <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
 
     <link rel="shortcut icon" href="../static/img/favicon.ico" />
-  	<title>Bibliomart</title>
+    <title>Bibliomart</title>
 </head>
 <body class="fonts-1">
 
@@ -59,6 +59,16 @@
                                                             <span class="text">Learn More</span>
                                                         </span>
                                                     </a>
+                                                    {% if book.is_sold %}
+                                                    <button class="button size-2 style-3" disabled>
+                                                        <span class="button-wrapper">
+                                                            <span class="icon">
+                                                                <img src="../static/img/icons/icon-5.png" alt="">
+                                                            </span>
+                                                            <span class="text">Sold Out</span>
+                                                        </span>
+                                                    </button>
+                                                    {% else %}
                                                     <button class="button size-2 style-3 add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
                                                         <span class="button-wrapper">
                                                             <span class="icon">
@@ -67,12 +77,13 @@
                                                             <span class="text">add to cart</span>
                                                         </span>
                                                     </button>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="price">
-                                            <div class="simple-article size-4"><span class="color">₹{{book.price}}</div>
-                                        </div>
+                                    </div>
+                                    <div class="price">
+                                        <div class="simple-article size-4"><span class="color">₹{{book.price}}</div>
                                         <div class="description">
                                             <div class="simple-article text size-2">
                                                 {{book.description}}
@@ -129,21 +140,21 @@
     <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
 
     <script>
-        $(document).ready(function(){
-            var minVal = parseInt($('.min-price').text());
-            var maxVal = parseInt($('.max-price').text());
-            $( "#prices-range" ).slider({
-                range: true,
-                min: minVal,
-                max: maxVal,
-                step: 5,
-                values: [ minVal, maxVal ],
-                slide: function( event, ui ) {
-                    $('.min-price').text(ui.values[ 0 ]);
-                    $('.max-price').text(ui.values[ 1 ]);
-                }
-            });
+    $(document).ready(function(){
+        var minVal = parseInt($('.min-price').text());
+        var maxVal = parseInt($('.max-price').text());
+        $( "#prices-range" ).slider({
+            range: true,
+            min: minVal,
+            max: maxVal,
+            step: 5,
+            values: [ minVal, maxVal ],
+            slide: function( event, ui ) {
+                $('.min-price').text(ui.values[ 0 ]);
+                $('.max-price').text(ui.values[ 1 ]);
+            }
         });
+    });
     </script>
 
 

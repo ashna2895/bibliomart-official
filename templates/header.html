@@ -86,10 +86,15 @@
     <div class="header-bottom">
         <div class="content-margins">
             <div class="row">
-                <div class="col-xs-3 col-sm-1">
-                    <a id="logo" href="/"><img src="{{ url_for('static', filename='files/images/favicon.png')}}" alt="">Bibliomart</a>
+                <div class="col-xs-3 col-md-1 col-sm-1 no-padding">
+                    <a class="pull-right" id="logo" href="/"><img src="{{ url_for('static', filename='files/images/favicon.png')}}" alt="">Bibliomart</a>
                 </div>
-                <div class="col-xs-9 col-sm-11 text-right">
+                <div class="col-sm-3 col-md-3 hidden-xs hidden-sm no-padding">
+                    <h2 class="header-logo-text">
+                        Bibliomart
+                    </h2>
+                </div>
+                <div class="col-xs-9 col-sm-7 col-md-7 text-right">
                     <div class="nav-wrapper">
                         <div class="nav-close-layer"></div>
                         <nav>

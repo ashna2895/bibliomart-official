@@ -59,6 +59,16 @@
                                                             <span class="text">Learn More</span>
                                                         </span>
                                                     </a>
+                                                    {% if book.is_sold %}
+                                                    <button class="button size-2 style-3" disabled>
+                                                        <span class="button-wrapper">
+                                                            <span class="icon">
+                                                                <img src="../static/img/icons/icon-5.png" alt="">
+                                                            </span>
+                                                            <span class="text">Sold Out</span>
+                                                        </span>
+                                                    </button>
+                                                    {% else %}
                                                     <button class="button size-2 style-3 add-cart-button" bookId="{{book.id}}" csrfToken="{{ csrf_token() }}">
                                                         <span class="button-wrapper">
                                                             <span class="icon">
@@ -67,6 +77,7 @@
                                                             <span class="text">add to cart</span>
                                                         </span>
                                                     </button>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +107,7 @@
                     </ul>
                 </div>
             </div>
-          
+
         </div>
 
         <div class="empty-space col-xs-b15 col-sm-b45"></div>

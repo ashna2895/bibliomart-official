@@ -96,6 +96,7 @@
                             <div class="form-group">
                                 <label for="category">CATEGORY</label>
                                 <select name = "category" class="form-control">
+                                    <option disabled selected>Select Category</option>
                                     {% for i in categories %}
                                     <option value="{{i.id}}">{{i.name}}</option>
                                     {% endfor %}
