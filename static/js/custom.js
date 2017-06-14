@@ -45,3 +45,12 @@ var postCartData = function(postData) {
             }, 3000);
         });
 }
+
+var searchform = document.getElementById('searchform');
+
+searchform.onsubmit = function(event) {
+    event.preventDefault();
+    var search_text = document.getElementById("search_text").value;
+    var search_loc = '/search/'+search_text;
+    window.location = search_loc;
+}

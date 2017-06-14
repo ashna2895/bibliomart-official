@@ -458,9 +458,15 @@ def checkout():
 
 @app.route('/search/<search_text>')
 def search(search_text):
+    if ' ' in search_text:
+        search_text = search_text.replace(' ','+')
+        return redirect('/search/'+search_text)
     search_text = search_text.replace('+','%')
     categories = Category.query.all()
-    books = Book.query.filter(Book.title.like('%'+search_text+'%')).all()
+    books = Book.query.filter(
+        Book.title.like('%'+search_text+'%') |
+        Book.author.like('%'+search_text+'%')
+    ).all()
     if current_user.is_authenticated:
         cart = g.user.cart.first()
         if not cart:
